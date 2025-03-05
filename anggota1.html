@@ -498,7 +498,7 @@
     <script>
         function showInfo(jabatan, nama, gambar, nim, angkatan, alamat, biro) {
             const modalBody = document.getElementById('infoModalBody');
-            let biroInfo = biro ? <p style="font-size: 0.9rem;"><strong>Biro:</strong> ${biro}</p> : '';
+            let biroInfo = biro ? `<p style="font-size: 0.9rem;"><strong>Biro:</strong> ${biro}</p>` : '';
             modalBody.innerHTML = `
                 <img src="${gambar}" alt="${nama}" class="profile-img-large mb-3" onclick="openImage('${gambar}')">
                 <h4>${nama}</h4>
@@ -515,8 +515,8 @@
 
         function showAnggota(divisi) {
             const modalBody = document.getElementById('infoModalBody');
-            let anggotaHTML = <h4 class="mb-3">Daftar Anggota ${divisi}</h4>;
-            anggotaHTML += <div class="scroll-container">; // Tambahkan container scroll
+            let anggotaHTML = `<h4 class="mb-3">Daftar Anggota ${divisi}</h4>`;
+            anggotaHTML += `<div class="scroll-container">`; // Tambahkan container scroll
 
             const anggotaDivisi = divisiData[divisi];
             if (anggotaDivisi) {
@@ -537,7 +537,7 @@
                 });
             }
 
-            anggotaHTML += </div>; // Tutup container scroll
+            anggotaHTML += `</div>`; // Tutup container scroll
             modalBody.innerHTML = anggotaHTML;
 
             const infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
@@ -546,7 +546,7 @@
 
         function showDetailAnggota(divisi, nama, gambar, angkatan, biro) {
             const detailModalBody = document.getElementById('detailModalBody');
-            let biroInfo = biro ? <p style="font-size: 0.9rem;"><strong>Biro:</strong> ${biro}</p> : '';
+            let biroInfo = biro ? `<p style="font-size: 0.9rem;"><strong>Biro:</strong> ${biro}</p>` : '';
             detailModalBody.innerHTML = `
                 <div style="text-align: center;">
                     <img src="${gambar}" alt="${nama} Divisi ${divisi}" class="profile-img-large mb-3" onclick="openImage('${gambar}')">
