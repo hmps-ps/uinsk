@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Kepengurusan HMPSPS UIN Sunan Kalijaga</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #000080;
+            --primary-light: #1a1a8a;
+            --primary-dark: #00004d;
+            --accent: #e6e6ff;
+            --text: #333;
+            --white: #ffffff;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 128, 0.1), 0 2px 4px -1px rgba(0, 0, 128, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 128, 0.1), 0 4px 6px -2px rgba(0, 0, 128, 0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 6px solid var(--white);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 2px;
+        }
+
+        .scroll-container {
+            padding: 2rem 1rem;
+            margin: 2rem -1rem;
+            overflow-x: auto;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            transform-origin: center;
+            animation: cardAppear 0.6s ease-out forwards;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 1.5rem auto;
+            border: 5px solid var(--primary);
+            padding: 5px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--primary-light);
+            box-shadow: 0 0 20px rgba(0, 0, 128, 0.3);
+        }
+
+        .btn-more-info, 
+        .btn-anggota {
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-more-info::before,
+        .btn-anggota::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .btn-more-info:hover::before,
+        .btn-anggota:hover::before {
+            left: 100%;
+        }
+
+        .btn-more-info:hover,
+        .btn-anggota:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3);
+            color: var(--white);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            background: var(--white);
+        }
+
+        .profile-img-large {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 6px solid var(--primary);
+            padding: 5px;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            transition: var(--transition);
+        }
+
+        .profile-img-large:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .profile-img {
+                width: 140px;
+                height: 140px;
+            }
+
+            .profile-img-large {
+                width: 180px;
+                height: 180px;
+            }
+
+            .btn-more-info,
+            .btn-anggota {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal.fade .modal-dialog {
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .modal.show .modal-dialog {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .btn-close:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container">
+        <h2 class="main-title slide-up">Struktur Kepengurusan HMPSPS</h2>
+
+        <!-- Ketua Umum & Wakil Ketua -->
+        <div class="scroll-container my-4">
+            <div class="card p-3">
+                <img src="https://site-id.github.io/content/testfotoalpi.jpeg" class="profile-img" alt="Ketua Umum HMPSPS" onclick="openImage('https://site-id.github.io/content/testfotoalpi.jpeg')">
+                <h5 class="mt-3">Tiara Febriani</h5>
+                <p class="text-muted">Ketua Umum HMPS-PS 2025</p>
+                <button class="btn btn-more-info" onclick="showInfo('Ketua Umum', 'Tiara Febriani', 'https://site-id.github.io/content/testfotoalpi2.jpeg', '', '2022', '', '')">More Info</button>
+            </div>
+            <div class="card p-3">
+                <img src="https://via.placeholder.com/150" class="profile-img" alt="Wakil Ketua HMPSPS" onclick="openImage('https://via.placeholder.com/150')">
+                <h5 class="mt-3">Duta Permana Baihaqi</h5>
+                <p class="text-muted">Wakil Ketua Umum HMPS-PS 2025</p>
+                <button class="btn btn-more-info" onclick="showInfo('Wakil Ketua Umum', 'Duta Permana Baihaqi', 'https://via.placeholder.com/150', '', '2023', '', '')">More Info</button>
+            </div>
+        </div>
+
+        <!-- Sekretaris & Bendahara -->
+        <div class="scroll-container my-4">
+            <!-- Sekretaris -->
+            <div class="card p-3">
+                <img src="https://site-id.github.io/content/testfotoalpi.jpeg" class="profile-img" alt="Sekretaris Umum 1 HMPSPS" onclick="openImage('https://site-id.github.io/content/testfotoalpi.jpeg')">
+                <h5 class="mt-3">Falentina Febriya Sugestin</h5>
+                <p class="text-muted">Sekretaris Umum 1</p>
+                <button class="btn btn-more-info" onclick="showInfo('Sekretaris Umum 1', 'Falentina Febriya Sugestin', 'https://site-id.github.io/content/testfotoalpi2.jpeg', '', '2022', '', '')">More Info</button>
+            </div>
+            <div class="card p-3">
+                <img src="https://via.placeholder.com/150" class="profile-img" alt="Sekretaris Umum 2 HMPSPS" onclick="openImage('https://via.placeholder.com/150')">
+                <h5 class="mt-3">Fajwa Naira</h5>
+                <p class="text-muted">Sekretaris Umum 2</p>
+                <button class="btn btn-more-info" onclick="showInfo('Sekretaris Umum 2', 'Fajwa Naira', 'https://via.placeholder.com/150', '', '2023', '', '')">More Info</button>
+            </div>
+
+            <!-- Bendahara -->
+            <div class="card p-3">
+                <img src="https://site-id.github.io/content/testfotoalpi.jpeg" class="profile-img" alt="Bendahara Umum 1 HMPSPS" onclick="openImage('https://site-id.github.io/content/testfotoalpi.jpeg')">
+                <h5 class="mt-3">Nayla Syazwina Eka Putri</h5>
+                <p class="text-muted">Bendahara Umum 1</p>
+                <button class="btn btn-more-info" onclick="showInfo('Bendahara Umum 1', 'Nayla Syazwina Eka Putri', 'https://site-id.github.io/content/testfotoalpi2.jpeg', '', '2023', '', '')">More Info</button>
+            </div>
+            <div class="card p-3">
+                <img src="https://via.placeholder.com/150" class="profile-img" alt="Bendahara Umum 2 HMPSPS" onclick="openImage('https://via.placeholder.com/150')">
+                <h5 class="mt-3">Flaliya Diara Salwa</h5>
+                <p class="text-muted">Bendahara Umum 2</p>
+                <button class="btn btn-more-info" onclick="showInfo('Bendahara Umum 2', 'Flaliya Diara Salwa', 'https://via.placeholder.com/150', '', '2023', '', '')">More Info</button>
+            </div>
+        </div>
+
+        <!-- Divisi -->
+        <h3 class="mt-5 slide-up">Divisi</h3>
+        <div class="scroll-container my-4">
+            <script>
+                const divisiData = {
+                    "LITBANG": [{
+                            nama: "Nida Nadia Anawaf",
+                            jabatan: "Kepala Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Maziidatunni'mah",
+                            jabatan: "Sekretaris Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Ervan Herdinansyah Suryana",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Diskusi dan Kajian"
+                        },
+                        {
+                            nama: "Yuliana Widia Ningsih",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Diskusi dan Kajian"
+                        },
+                        {
+                            nama: "Ibnu Bintang",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Riset dan Akademik"
+                        },
+                        {
+                            nama: "Cintina Dewi Masitah",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Riset dan Akademik"
+                        },
+                        {
+                            nama: "Muhammad Archie Saputra",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Riset dan Akademik"
+                        }
+                    ],
+                    "PSDM": [{
+                            nama: "Annisa Stevani Novitasari",
+                            jabatan: "Kepala Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Naila Zika Alisya",
+                            jabatan: "Sekretaris Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Zikra Cindara Hibatillah",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Pemberdayaan"
+                        },
+                        {
+                            nama: "Muhammad Alfi Fahrizal",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Pemberdayaan"
+                        },
+                        {
+                            nama: "Najwa Nur Safitri",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Pemberdayaan"
+                        },
+                        {
+                            nama: "R. Haydar Ali Fatan",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Pemberdayaan"
+                        },
+                        {
+                            nama: "Nabila Khoerunnisah",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Pemberdayaan"
+                        }
+                    ],
+                    "HUMAS": [{
+                            nama: "Khalisha Aura Izzatunnisa",
+                            jabatan: "Kepala Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Riska Milarunika Nata Kusuma",
+                            jabatan: "Sekretaris Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Dea Agustin Lestari",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Sosial Aspirasi"
+                        },
+                        {
+                            nama: "Hiban Akbar Mahpudin",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Sosial Aspirasi"
+                        },
+                        {
+                            nama: "Amelia Sarvika Caharani",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Jaringan Kemitraan"
+                        },
+                        {
+                            nama: "Savira Zulfaini",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Jaringan Kemitraan"
+                        }
+                    ],
+                    "MIT": [{
+                            nama: "Muhammad Habiburrahman",
+                            jabatan: "Kepala Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Nauval Rizki Faturrahman",
+                            jabatan: "Sekretaris Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Eka Dyas Saputra",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Jurnallistik"
+                        },
+                        {
+                            nama: "Aprin Islamiyatun Utami",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Multimedia"
+                        },
+                        {
+                            nama: "Febri Dwi Astuti",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Multimedia"
+                        },
+                        {
+                            nama: "Vivia Khairuni Lubis",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Teknologi dan Informasi"
+                        }
+                    ],
+                    "Entrepreneur": [{
+                            nama: "Faizal Nursanda Fausan",
+                            jabatan: "Kepala Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Afiyana Maulida",
+                            jabatan: "Sekretaris Divisi",
+                            angkatan: "2023",
+                            biro: ""
+                        },
+                        {
+                            nama: "Almira Noorfisza",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Ekonomi Kreatif"
+                        },
+                        {
+                            nama: "Tasya Muslimah",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Ekonomi Kreatif"
+                        },
+                        {
+                            nama: "Zahrotussyifa",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Ekonomi Kreatif"
+                        },
+                        {
+                            nama: "Riza Ahmad Septiadi",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Pengembangan Usaha"
+                        },
+                        {
+                            nama: "Noraliza Citra Fanjani",
+                            jabatan: "Anggota",
+                            angkatan: "2023",
+                            biro: "Biro Pengembangan Usaha"
+                        }
+                    ]
+                };
+
+                for (const divisi in divisiData) {
+                    const urlFotoKepalaDivisiProfile = (divisi === "LITBANG") ? "https://site-id.github.io/content/testfotoalpi.jpeg" :
+                        "https://via.placeholder.com/150";
+                    const urlFotoKepalaDivisiMoreInfo = (divisi === "LITBANG") ? "https://site-id.github.io/content/testfotoalpi2.jpeg" :
+                        "https://via.placeholder.com/150";
+
+                    document.write(`
+                        <div class="card p-3">
+                            <img src="${urlFotoKepalaDivisiProfile}" class="profile-img" alt="Kepala Divisi ${divisi} HMPSPS" onclick="openImage('${urlFotoKepalaDivisiProfile}')">
+                            <h5 class="mt-3">${divisi}</h5>
+                            <p class="text-muted">${divisiData[divisi][0].nama}</p>
+                            <button class="btn btn-more-info" onclick="showInfo('${divisi}', '${divisiData[divisi][0].nama}', '${urlFotoKepalaDivisiMoreInfo}', '', '${divisiData[divisi][0].angkatan}', '', '')">More Info</button>
+                            <button class="btn btn-anggota mt-2" onclick="showAnggota('${divisi}')">Anggota ${divisi}</button>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Info -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Informasi Anggota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="infoModalBody">
+                    <!-- Content will be filled by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Gambar -->
+    <div class="modal fade" id="gambarModal" tabindex="-1" role="dialog" aria-labelledby="gambarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gambarModalLabel">Gambar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" alt="Gambar" id="gambarModalImg" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Detail Anggota -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Anggota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" id="detailModalBody">
+                    <!-- Content will be filled by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Loading screen handler
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loading-screen').style.display = 'none';
+                    initializeAnimations();
+                }, 500);
+            }, 1500);
+        });
+
+        // Initialize animations
+        function initializeAnimations() {
+            document.querySelectorAll('.card').forEach((card, index) => {
+                card.style.setProperty('--card-index', index);
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            document.querySelectorAll('section').forEach((section, index) => {
+                section.classList.add('slide-up');
+                section.style.animationDelay = `${index * 0.2}s`;
+            });
+        }
+
+        function showInfo(jabatan, nama, gambar, nim, angkatan, alamat, biro) {
+            const modalBody = document.getElementById('infoModalBody');
+            let biroInfo = biro ? `<p class="text-muted mb-2"><strong>Biro:</strong> ${biro}</p>` : '';
+            modalBody.innerHTML = `
+                <img src="${gambar}" alt="${nama}" class="profile-img-large mb-4" onclick="openImage('${gambar}')">
+                <h4 class="mb-3">${nama}</h4>
+                <p class="text-muted mb-2"><strong>Jabatan:</strong> ${jabatan}</p>
+                <p class="text-muted mb-2"><strong>NIM:</strong> ${nim || '-'}</p>
+                <p class="text-muted mb-2"><strong>Angkatan:</strong> ${angkatan}</p>
+                <p class="text-muted mb-2"><strong>Alamat:</strong> ${alamat || '-'}</p>
+                ${biroInfo}
+            `;
+
+            const infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
+            infoModal.show();
+        }
+
+        function showAnggota(divisi) {
+            const modalBody = document.getElementById('infoModalBody');
+            let anggotaHTML = `<h4 class="mb-4">Daftar Anggota ${divisi}</h4>`;
+            anggotaHTML += `<div class="scroll-container">`;
+
+            const anggotaDivisi = divisiData[divisi];
+            if (anggotaDivisi) {
+                anggotaDivisi.forEach((anggota, index) => {
+                    let gambarAnggota = "https://via.placeholder.com/150";
+                    if (index === 0) {
+                        gambarAnggota = "https://site-id.github.io/content/testfotoalpi.jpeg";
+                    }
+                    anggotaHTML += `
+                        <div class="card p-3 mb-3">
+                            <img src="${gambarAnggota}" alt="${anggota.nama}" class="profile-img mb-3" onclick="openImage('${gambarAnggota}')">
+                            <h5 class="mb-2">${anggota.nama}</h5>
+                            <p class="text-muted mb-3"><strong>Jabatan:</strong> ${anggota.jabatan}</p>
+                            <button class="btn btn-more-info" onclick="showDetailAnggota('${divisi}', '${anggota.nama}', '${gambarAnggota}', '${anggota.angkatan}', '${anggota.biro}')">More Info</button>
+                        </div>
+                    `;
+                });
+            }
+
+            anggotaHTML += `</div>`;
+            modalBody.innerHTML = anggotaHTML;
+
+            const infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
+            infoModal.show();
+        }
+
+        function showDetailAnggota(divisi, nama, gambar, angkatan, biro , angkatan, biro) {
+            const detailModalBody = document.getElementById('detailModalBody');
+            let biroInfo = biro ? `<p class="text-muted mb-2"><strong>Biro:</strong> ${biro}</p>` : '';
+            detailModalBody.innerHTML = `
+                <div class="text-center">
+                    <img src="${gambar}" alt="${nama}" class="profile-img-large mb-4" onclick="openImage('${gambar}')">
+                    <h4 class="mb-3">${nama}</h4>
+                    <p class="text-muted mb-2"><strong>Divisi:</strong> ${divisi}</p>
+                    <p class="text-muted mb-2"><strong>Angkatan:</strong> ${angkatan}</p>
+                    ${biroInfo}
+                </div>
+            `;
+            const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+            detailModal.show();
+        }
+
+        function openImage(imageUrl) {
+            document.getElementById('gambarModalImg').src = imageUrl;
+            const gambarModal = new bootstrap.Modal(document.getElementById('gambarModal'));
+            gambarModal.show();
+        }
+
+        // Enhanced modal animations
+        $('.modal').on('show.bs.modal', function (e) {
+            $(this).find('.modal-dialog').addClass('slide-up');
+        });
+
+        $('.modal').on('hidden.bs.modal', function (e) {
+            $(this).find('.modal-dialog').removeClass('slide-up');
+        });
+
+        // Prevent modal from losing focus
+        $('.modal').on('shown.bs.modal', function(e) {
+            $(document).off('focusin.modal');
+        });
+    </script>
+</body>
+</html>
