@@ -613,38 +613,6 @@
             transform-origin: left;
         }
 
-        /* Fix Custom Cursor */
-        @media (min-width: 1024px) {
-            body {
-                cursor: none !important;
-            }
-
-            .custom-cursor, .cursor-dot {
-                display: block;
-            }
-        }
-
-        @media (max-width: 1023px) {
-            body {
-                cursor: default !important;
-            }
-
-            .custom-cursor, .cursor-dot {
-                display: none;
-            }
-        }
-
-        .custom-cursor {
-            pointer-events: none !important;
-            mix-blend-mode: difference;
-            z-index: 9999;
-        }
-
-        .cursor-dot {
-            pointer-events: none !important;
-            z-index: 9999;
-        }
-
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
