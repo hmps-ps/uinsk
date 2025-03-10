@@ -574,45 +574,7 @@
 
         .btn:hover::after {
             transform: translateX(100%);
-            transition: transform 0.7s cubic-bezier(0.2, 0, 0.3, 1);
-        }
-
-        /* Custom Cursor Effects */
-        body {
-            cursor: none;
-        }
-
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.2s ease;
-            transform: translate(-50%, -50%);
-            display: block !important;
-        }
-
-        .cursor-dot {
-            width: 4px;
-            height: 4px;
-            background: white;
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            transform: translate(-50%, -50%);
-            display: block !important;
-        }
-
-        a:hover ~ .custom-cursor,
-        button:hover ~ .custom-cursor {
-            transform: translate(-50%, -50%) scale(1.5);
-            background: var(--secondary-color);
-            mix-blend-mode: difference;
+            transition: transform 0.7s cubic-bezier(0.2, 0, 0.3, 1); 
         }
 
         /* Enhanced Card Effects */
