@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Kepengurusan HMPSPS UIN Sunan Kalijaga</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #000080;
+            --primary-light: #1a1a8a;
+            --primary-dark: #00004d;
+            --accent: #e6e6ff;
+            --text: #333;
+            --white: #ffffff;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 128, 0.1), 0 2px 4px -1px rgba(0, 0, 128, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 128, 0.1), 0 4px 6px -2px rgba(0, 0, 128, 0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 6px solid var(--white);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite, glow 2s ease-in-out infinite;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary); }
+            100% { box-shadow: 0 0 5px var(--primary); }
+        }
+
+        .container {
+            max-width: 1400px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 2px;
+        }
+
+        .scroll-container {
+            display: flex;
+            gap: 2.5rem;
+            padding: 3rem 1.5rem;
+            margin: 2rem -1rem;
+            overflow-x: auto;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            transform-origin: center;
+            animation: cardAppear 0.6s ease-out forwards;
+            margin: 1.5rem;  /* Added margin around cards */
+            min-width: 320px;
+            flex: 0 0 auto;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .card:hover {
+            transform: perspective(1000px) rotateY(10deg) translateY(-5px);
+            box-shadow: -10px 10px 20px rgba(0, 0, 128, 0.2);
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 1.5rem auto;
+            border: 5px solid var(--primary);
+            padding: 5px;
+            background: var(--white);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--primary-light);
+            box-shadow: 0 0 20px rgba(0, 0, 128, 0.3);
+        }
+
+        .btn-more-info, 
+        .btn-anggota {
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            animation: buttonGlow 3s infinite;
+        }
+
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary); }
+            100% { box-shadow: 0 0 5px var(--primary); }
+        }
+
+        .btn-more-info::before,
+        .btn-anggota::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .btn-more-info:hover::before,
+        .btn-anggota:hover::before {
+            left: 100%;
+        }
+
+        .btn-more-info:hover,
+        .btn-anggota:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3);
+            color: var(--white);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            background: var(--white);
+        }
+
+        .profile-img-large {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 8px solid var(--primary);
+            padding: 5px;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background: var(--white);
+        }
+
+        .profile-img-large:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--primary-light);
+            box-shadow: 0 10px 25px rgba(0, 0, 128, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .profile-img {
+                width: 140px;
+                height: 140px;
+            }
+
+            .profile-img-large {
+                width: 180px;
+                height: 180px;
+            }
+
+            .btn-more-info,
+            .btn-anggota {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .scroll-container {
+                gap: 1rem;
+                padding: 1.5rem 0.5rem;
+            }
+
+            .card {
+                min-width: 280px;
+                margin: 1rem;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-img-large {
+                width: 200px;
+                height: 200px;
+            }
+
+            .modal-dialog {
+                margin: 0.5rem;
+            }
+
+            .main-title {
+                font-size: 1.8rem;
+                padding: 0 1rem;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal.fade .modal-dialog {
+            transform: scale(0.7) translateY(-50px);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .modal.show .modal-dialog {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .btn-close:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+
+        .section-title {
+            margin-top: 5rem;
+            margin-bottom: 3rem;
+            padding: 1rem;
+        }
+
+        /* Add padding to card content */
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Increase spacing between sections */
+        .container > div:not(:last-child) {
+            margin-bottom: 5rem;
+        }
+
+        .divisi-wrapper {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+        
+        .divisi-card {
+            min-width: 300px;
+            flex: 0 0 auto;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Cool Background Animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--white) 100%);
+            z-index: -1;
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Enhanced Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        .section-header {
+            background: linear-gradient(45deg, #000080, #1a1a8a);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 128, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: headerFloat 3s ease-in-out infinite;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        .section-header h3 {
+            color: white;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes headerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .border-accent {
+            width: 50%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 1rem auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .border-accent::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: white;
+            animation: borderFlow 2s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            .section-header {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .scroll-container {
+                gap: 1rem;
+                padding: 0.5rem;
+                margin: 1rem -0.5rem;
+            }
+
+            .card {
+                min-width: 260px;
+                margin: 0.5rem;
+            }
+
+            .section-header {
+                padding: 1rem;
+                margin: 0.5rem;
+            }
+
+            .main-title {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .modal-dialog {
+                margin: 0.5rem;
+                max-width: 95%;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-img-large {
+                width: 160px;
+                height: 160px;
+            }
+        }
+
+        /* Enhanced Animations */
+        .card {
+            animation: fadeInScale 0.6s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .section-header {
+            animation: headerSlideDown 0.8s ease-out forwards,
+                       headerFloat 3s ease-in-out infinite 0.8s;
+        }
+
+        @keyframes headerSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-img {
+            animation: profilePulse 2s infinite;
+        }
+
+        @keyframes profilePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 0, 128, 0.3); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-more-info,
+        .btn-anggota {
+            animation: buttonGlow 3s infinite;
+        }
+
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary); transform: translateY(-3px); }
+            100% { box-shadow: 0 0 5px var(--primary); }
+        }
+
+        /* Smooth Content Loading */
+        .divisi-wrapper .card {
+            animation-delay: calc(var(--card-index) * 0.1s);
+        }
+
+        /* Enhanced Modal Animations */
+        .modal.fade .modal-dialog {
+            transform: scale(0.7) translateY(-50px) rotate(-5deg);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal.show .modal-dialog {
+            transform: scale(1) translateY(0) rotate(0);
+            opacity: 1;
+        }
+
+        /* Scroll Container Enhancement */
+        .scroll-container {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scroll-snap-type: x mandatory;
+        }
+
+        .scroll-container > * {
+            scroll-snap-align: start;
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) {
+            .card:active {
+                transform: scale(0.98);
+                transition: transform 0.2s;
+            }
+
+            .profile-img:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container">
+        <h2 class="main-title slide-up">Struktur Kepengurusan HMPSPS</h2>
+
+        <!-- BPH Section -->
+        <div class="section-title mb-4">
+            <div class="section-header text-center">
+                <h3 class="display-6 fw-bold">Badan Pengurus Harian (BPH)</h3>
+                <div class="border-accent"></div>
+            </div>
+        </div>
+
+        <!-- Ketua Umum & Wakil Ketua -->
+        <div class="scroll-container my-4">
+            <div class="card p-3">
+                <img src="https://hmps-ps.github.io/uinsk/Tiara1.JPG" class="profile-img" alt="Ketua Umum HMPSPS" onclick="openImage('https://hmps-ps.github.io/uinsk/Tiara1.JPG')">
+                <h5 class="mt-3">Tiara Febriani</h5>
+                <p class="text-muted">Ketua Umum HMPS-PS 2025</p>
+                <button class="btn btn-more-info" onclick="showInfo('Ketua Umum', 'Tiara Febriani', 'https://hmps-ps.github.io/uinsk/Tiara1.JPG', 'https://hmps-ps.github.io/uinsk/Tiara2.JPG', '', '2022', '', '')">More Info</button>
+            </div>
+            <div class="card p-3">
+                <img src="https://hmps-ps.github.io/uinsk/Baihaqi1.JPG" class="profile-img" alt="Wakil Ketua HMPSPS" onclick="openImage('https://hmps-ps.github.io/uinsk/Baihaqi1.JPG')">
+                <h5 class="mt-3">Duta Permana Baihaqi</h5>
+                <p class="text-muted">Wakil Ketua Umum HMPS-PS 2025</p>
+                <button class="btn btn-more-info" onclick="showInfo('Wakil Ketua Umum', 'Duta Permana Baihaqi', 'https://hmps-ps.github.io/uinsk/Baihaqi1.JPG', 'https://hmps-ps.github.io/uinsk/Baihaqi2.JPG', '', '2023', '', '')">More Info</button>
+            </div>
+        </div>
+
+        <!-- Sekretaris & Bendahara -->
+        <div class="scroll-container my-4">
+            <!-- Sekretaris -->
+            <div class="card p-3">
+                <img src="https://hmps-ps.github.io/uinsk/Falen1.JPG" class="profile-img" alt="Sekretaris Umum 1 HMPSPS" onclick="openImage('https://hmps-ps.github.io/uinsk/Falen1.JPG')">
+                <h5 class="mt-3">Falentina Febriya Sugestin</h5>
+                <p class="text-muted">Sekretaris Umum 1</p>
+                <button class="btn btn-more-info" onclick="showInfo('Sekretaris Umum 1', 'Falentina Febriya Sugestin', 'https://hmps-ps.github.io/uinsk/Falen1.JPG', 'https://hmps-ps.github.io/uinsk/Falen2.JPG', '', '2022', '', '')">More Info</button>
+            </div>
+            <div class="card p-3">
+                <img src="https://hmps-ps.github.io/uinsk/Fajwa1.JPG" class="profile-img" alt="Sekretaris Umum 2 HMPSPS" onclick="openImage('https://hmps-ps.github.io/uinsk/Fajwa1.JPG')">
+                <h5 class="mt-3">Fajwa Naira</h5>
+                <p class="text-muted">Sekretaris Umum 2</p>
+                <button class="btn btn-more-info" onclick="showInfo('Sekretaris Umum 2', 'Fajwa Naira', 'https://hmps-ps.github.io/uinsk/Fajwa1.JPG', 'https://hmps-ps.github.io/uinsk/Fajwa2.JPG', '', '2023', '', '')">More Info</button>
+            </div>
+
+            <!-- Bendahara -->
+            <div class="card p-3">
+                <img src="https://hmps-ps.github.io/uinsk/Nayla1.JPG" class="profile-img" alt="Bendahara Umum 1 HMPSPS" onclick="openImage('https://hmps-ps.github.io/uinsk/Nayla1.JPG')">
+                <h5 class="mt-3">Nayla Syazwina Eka Putri</h5>
+                <p class="text-muted">Bendahara Umum 1</p>
+                <button class="btn btn-more-info" onclick="showInfo('Bendahara Umum 1', 'Nayla Syazwina Eka Putri', 'https://hmps-ps.github.io/uinsk/Nayla1.JPG', 'https://hmps-ps.github.io/uinsk/Nayla2.JPG', '', '2023', '', '')">More Info</button>
+            </div>
+            <div class="card p-3">
+                <img src="https://hmps-ps.github.io/uinsk/Salwa2.JPG" class="profile-img" alt="Bendahara Umum 2 HMPSPS" onclick="openImage('https://hmps-ps.github.io/uinsk/Salwa2.JPG')">
+                <h5 class="mt-3">Flaliya Diara Salwa</h5>
+                <p class="text-muted">Bendahara Umum 2</p>
+                <button class="btn btn-more-info" onclick="showInfo('Bendahara Umum 2', 'Flaliya Diara Salwa', 'https://hmps-ps.github.io/uinsk/Salwa1.JPG', 'https://hmps-ps.github.io/uinsk/Salwa1.JPG', '', '2023', '', '')">More Info</button>
+            </div>
+        </div>
+
+        <!-- Divisi Section -->
+        <div class="section-title mt-5 mb-4">
+            <div class="section-header text-center">
+                <h3 class="display-6 fw-bold">Divisi</h3>
+                <div class="border-accent"></div>
+            </div>
+        </div>
+        <div class="divisi-wrapper">
+            <script>
+                const divisiData = {
+    "LITBANG": [{
+            nama: "Nida Nadia Anawaf",
+            jabatan: "Kepala Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Nida1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Nida2.JPG"
+        },
+        {
+            nama: "Maziidatunni'mah",
+            jabatan: "Sekretaris Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Mazi1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Mazi2.JPG"
+        },
+        {
+            nama: "Ervan Herdinansyah Suryana",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Diskusi dan Kajian",
+            foto: "https://hmps-ps.github.io/uinsk/Ervan1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Ervan2.JPG"
+        },
+        {
+            nama: "Yuliana Widia Ningsih",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Diskusi dan Kajian",
+            foto: "https://hmps-ps.github.io/uinsk/Yuliana1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Yuliana2.JPG"
+        },
+        {
+            nama: "Ibnu Bintang",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Riset dan Akademik",
+            foto: "https://hmps-ps.github.io/uinsk/Ibnu1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Ibnu2.JPG"
+        },
+        {
+            nama: "Cintina Dewi Masitah",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Riset dan Akademik",
+            foto: "https://hmps-ps.github.io/uinsk/Cintina1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Cintina2.JPG"
+        },
+        {
+            nama: "Muhammad Archie Saputra",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Riset dan Akademik",
+            foto: "https://hmps-ps.github.io/uinsk/Archi1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Archi2.JPG"
+        }
+    ],
+    "PSDM": [{
+            nama: "Annisa Stevani Novitasari",
+            jabatan: "Kepala Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Anisa1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Anisa2.JPG"
+        },
+        {
+            nama: "Naila Zika Alisya",
+            jabatan: "Sekretaris Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Zika1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Zika2.JPG"
+        },
+        {
+            nama: "Zikra Cindara Hibatillah",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Pemberdayaan",
+            foto: "https://hmps-ps.github.io/uinsk/Zikra1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Zikra2.JPG"
+        },
+        {
+            nama: "Muhammad Alfi Fahrizal",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Pemberdayaan",
+            foto: "https://hmps-ps.github.io/uinsk/Alpi1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Alpi2.JPG"
+        },
+        {
+            nama: "Najwa Nur Safitri",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Pemberdayaan",
+            foto: "https://hmps-ps.github.io/uinsk/Juju1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Juju2.JPG"
+        },
+        {
+            nama: "R. Haydar Ali Fatan",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Pemberdayaan",
+            foto: "https://hmps-ps.github.io/uinsk/Haidar1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Haidar2.JPG"
+        },
+        {
+            nama: "Nabila Khoerunnisah",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Pemberdayaan",
+            foto: "https://hmps-ps.github.io/uinsk/Bila1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Bila2.JPG"
+        }
+    ],
+    "HUMAS": [{
+            nama: "Khalisha Aura Izzatunnisa",
+            jabatan: "Kepala Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Aura1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Aura2.JPG"
+        },
+        {
+            nama: "Riska Milarunika Nata Kusuma",
+            jabatan: "Sekretaris Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Mila1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Mila2.JPG"
+        },
+        {
+            nama: "Dea Agustin Lestari",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Sosial Aspirasi",
+            foto: "https://hmps-ps.github.io/uinsk/Dea1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Dea2.JPG"
+        },
+        {
+            nama: "Hiban Akbar Mahpudin",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Sosial Aspirasi",
+            foto: "https://hmps-ps.github.io/uinsk/Hiban1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Hiban2.JPG"
+        },
+        {
+            nama: "Amelia Sarvika Caharani",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Jaringan Kemitraan",
+            foto: "https://hmps-ps.github.io/uinsk/Lia1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Lia2.JPG"
+        },
+        {
+            nama: "Savira Zulfaini",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Jaringan Kemitraan",
+            foto: "https://hmps-ps.github.io/uinsk/Savira1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Savira2.JPG"
+        }
+    ],
+    "MIT": [{
+            nama: "Muhammad Habiburrahman",
+            jabatan: "Kepala Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Muhab1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Muhab2.JPG"
+        },
+        {
+            nama: "Nauval Rizki Faturrahman",
+            jabatan: "Sekretaris Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Noval1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Noval2.JPG"
+        },
+        {
+            nama: "Eka Dyas Saputra",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Jurnalistik",
+            foto: "https://hmps-ps.github.io/uinsk/Dyas1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Dyas2.JPG"
+        },
+        {
+            nama: "Aprin Islamiyatun Utami",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Multimedia",
+            foto: "https://hmps-ps.github.io/uinsk/Aprin1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Aprin2.JPG"
+        },
+        {
+            nama: "Febri Dwi Astuti",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Multimedia",
+            foto: "https://hmps-ps.github.io/uinsk/Febi1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Febi2.JPG"
+        },
+        {
+            nama: "Vivia Khairuni Lubis",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Teknologi dan Informasi",
+            foto: "https://hmps-ps.github.io/uinsk/Vivi1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Vivi2.JPG"
+        }
+    ],
+    "Entrepreneur": [{
+            nama: "Faizal Nursanda Fausan",
+            jabatan: "Kepala Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Ical1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Ical2.JPG"
+        },
+        {
+            nama: "Afiyana Maulida",
+            jabatan: "Sekretaris Divisi",
+            angkatan: "2023",
+            biro: "",
+            foto: "https://hmps-ps.github.io/uinsk/Afiyana1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Afiyana2.JPG"
+        },
+        {
+            nama: "Almira Noorfisza",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Ekonomi Kreatif",
+            foto: "https://hmps-ps.github.io/uinsk/Almira1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Almira2.JPG"
+        },
+        {
+            nama: "Tasya Muslimah",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Ekonomi Kreatif",
+            foto: "https://hmps-ps.github.io/uinsk/Tasya1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Tasya2.JPG"
+        },
+        {
+            nama: "Zahrotussyifa",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Ekonomi Kreatif",
+            foto: "https://hmps-ps.github.io/uinsk/Syifa1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Syifa2.JPG"
+        },
+        {
+            nama: "Riza Ahmad Septiadi",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Pengembangan Usaha",
+            foto: "https://hmps-ps.github.io/uinsk/Riza1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Riza2.JPG"
+        },
+        {
+            nama: "Noraliza Citra Fanjani",
+            jabatan: "Anggota",
+            angkatan: "2023",
+            biro: "Biro Pengembangan Usaha",
+            foto: "https://hmps-ps.github.io/uinsk/Citra1.JPG",
+            fotoMoreInfo: "https://hmps-ps.github.io/uinsk/Citra2.JPG"
+        }
+    ]
+};
+
+                function showInfo(jabatan, nama, foto, fotoMoreInfo, nim, angkatan, alamat, biro) {
+                    cleanupModal();
+                    const modalBody = document.getElementById('infoModalBody');
+                    let biroInfo = biro ? `<p class="text-muted mb-2"><strong>Biro:</strong> ${biro}</p>` : '';
+                    
+                    modalBody.innerHTML = `
+                        <div class="text-center">
+                            <div class="profile-img-container">
+                                <img src="${fotoMoreInfo}" alt="${nama}" class="profile-img-large" onclick="openImage('${fotoMoreInfo}')">
+                            </div>
+                            <h4 class="mb-3">${nama}</h4>
+                            <p class="text-muted mb-2"><strong>Jabatan:</strong> ${jabatan}</p>
+                            <p class="text-muted mb-2"><strong>Angkatan:</strong> ${angkatan}</p>
+                            ${biroInfo}
+                        </div>
+                    `;
+
+                    const infoModal = new bootstrap.Modal(document.getElementById('infoModal'), {
+                        keyboard: false
+                    });
+                    infoModal.show();
+                }
+
+                function showAnggota(divisi) {
+                    cleanupModal();
+                    const modalBody = document.getElementById('infoModalBody');
+                    let anggotaHTML = `<h4 class="mb-4">Daftar Anggota ${divisi}</h4>`;
+                    anggotaHTML += `<div class="scroll-container">`;
+
+                    const anggotaDivisi = divisiData[divisi];
+                    if (anggotaDivisi) {
+                        anggotaDivisi.forEach((anggota) => {
+                            const escapedNama = anggota.nama.replace(/['"]/g, '&quot;');
+                            const escapedJabatan = anggota.jabatan.replace(/['"]/g, '&quot;');
+                            const escapedBiro = (anggota.biro || '').replace(/['"]/g, '&quot;');
+                            
+                            anggotaHTML += `
+                                <div class="card p-3 mb-3">
+                                    <img src="${anggota.foto}" alt="${escapedNama}" class="profile-img mb-3" onclick="openImage('${anggota.foto}')">
+                                    <h5 class="mb-2">${escapedNama}</h5>
+                                    <p class="text-muted mb-3"><strong>Jabatan:</strong> ${escapedJabatan}</p>
+                                    <button class="btn btn-more-info" onclick="showInfo('${escapedJabatan}', '${escapedNama}', '${anggota.foto}', '${anggota.fotoMoreInfo}', '', '${anggota.angkatan}', '', '${escapedBiro}')">
+                                        More Info
+                                    </button>
+                                </div>
+                            `;
+                        });
+                    }
+
+                    anggotaHTML += `</div>`;
+                    modalBody.innerHTML = anggotaHTML;
+
+                    const infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
+                    infoModal.show();
+                }
+
+                // Add this helper function for modal transitions
+                function cleanupModal() {
+                    const existingModals = document.querySelectorAll('.modal');
+                    existingModals.forEach(modal => {
+                        const modalInstance = bootstrap.Modal.getInstance(modal);
+                        if (modalInstance) {
+                            modalInstance.hide();
+                        }
+                    });
+                    
+                    document.body.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                    const backdrops = document.querySelectorAll('.modal-backdrop');
+                    backdrops.forEach(backdrop => backdrop.remove());
+                }
+
+                // Add this event listener
+                document.addEventListener('show.bs.modal', function(event) {
+                    if (event.target.classList.contains('modal')) {
+                        const zIndex = 1040 + (10 * document.querySelectorAll('.modal.show').length);
+                        event.target.style.zIndex = zIndex;
+                        setTimeout(function() {
+                            const backdrop = document.querySelector('.modal-backdrop:last-child');
+                            if (backdrop) {
+                                backdrop.style.zIndex = zIndex - 1;
+                            }
+                        }, 0);
+                    }
+                });
+
+                for (const divisi in divisiData) {
+                    const urlFotoKepalaDivisiProfile = divisiData[divisi][0].foto;
+                    const urlFotoKepalaDivisiMoreInfo = divisiData[divisi][0].fotoMoreInfo;
+
+                    document.write(`
+                        <div class="card divisi-card p-3">
+                            <img src="${urlFotoKepalaDivisiProfile}" class="profile-img" alt="Kepala Divisi ${divisi}" onclick="openImage('${urlFotoKepalaDivisiProfile}')">
+                            <h5 class="mt-3">${divisi}</h5>
+                            <p class="text-muted">${divisiData[divisi][0].nama}</p>
+                            <button class="btn btn-more-info mb-2" onclick="showInfo('${divisiData[divisi][0].jabatan}', '${divisiData[divisi][0].nama}', '${urlFotoKepalaDivisiProfile}', '${urlFotoKepalaDivisiMoreInfo}', '', '${divisiData[divisi][0].angkatan}', '', '${divisiData[divisi][0].biro}')">More Info</button>
+                            <button class="btn btn-anggota" onclick="showAnggota('${divisi}')">Anggota ${divisi}</button>
+                        </div>
+                    `);
+                }
+
+                document.getElementById('infoModal').addEventListener('hidden.bs.modal', function () {
+                    document.getElementById('infoModalBody').innerHTML = '';
+                });
+
+                document.getElementById('detailModal').addEventListener('hidden.bs.modal', function () {
+                    document.getElementById('detailModalBody').innerHTML = '';
+                });
+
+                function openImage(imageUrl) {
+                    document.getElementById('gambarModalImg').src = imageUrl;
+                    const gambarModal = new bootstrap.Modal(document.getElementById('gambarModal'));
+                    gambarModal.show();
+                }
+
+                // Ensure modals are properly reset when closed
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.addEventListener('hidden.bs.modal', function () {
+                        const modalBody = modal.querySelector('.modal-body');
+                        if (modalBody) {
+                            modalBody.innerHTML = '';
+                        }
+                    });
+                });
+
+                // Fix for modal close button not working properly
+                document.querySelectorAll('.btn-close').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const modal = bootstrap.Modal.getInstance(button.closest('.modal'));
+                        modal.hide();
+                    });
+                });
+
+                // Add this at the bottom of your script section
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Handle modal close via button
+                    document.querySelectorAll('[data-bs-dismiss="modal"]').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                            if (modal) {
+                                modal.hide();
+                            }
+                        });
+                    });
+
+                    // Handle modal backdrop clicks
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        modal.addEventListener('click', function(e) {
+                            if (e.target === this) {
+                                const modalInstance = bootstrap.Modal.getInstance(this);
+                                if (modalInstance) {
+                                    modalInstance.hide();
+                                }
+                            }
+                        });
+                    });
+                });
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Handle modal events
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        modal.addEventListener('hidden.bs.modal', function () {
+                            // Full cleanup when modal is hidden
+                            document.body.classList.remove('modal-open');
+                            document.body.style.overflow = '';
+                            document.body.style.paddingRight = '';
+                            const backdrop = document.querySelector('.modal-backdrop');
+                            if (backdrop) {
+                                backdrop.remove();
+                            }
+                            // Clear modal content
+                            const modalBody = this.querySelector('.modal-body');
+                            if (modalBody) {
+                                modalBody.innerHTML = '';
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Info -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Informasi Anggota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="infoModalBody">
+                    <!-- Content will be filled by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Gambar -->
+    <div class="modal fade" id="gambarModal" tabindex="-1" role="dialog" aria-labelledby="gambarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gambarModalLabel">Gambar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" alt="Gambar" id="gambarModalImg" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Detail Anggota -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Anggota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" id="detailModalBody">
+                    <!-- Content will be filled by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Loading screen handler
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(function() {
+                        loadingScreen.style.display = 'none';
+                        initializeAnimations();
+                    }, 500);
+                }
+            }, 1000);
+        });
+
+        // Initialize animations
+        function initializeAnimations() {
+            document.querySelectorAll('.card').forEach((card, index) => {
+                card.style.setProperty('--card-index', index);
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            document.querySelectorAll('section').forEach((section, index) => {
+                section.classList.add('slide-up');
+                section.style.animationDelay = `${index * 0.2}s`;
+            });
+        }
+
+        // Modal cleanup function
+        function cleanupModal() {
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => backdrop.remove());
+        }
+
+        // Add to existing modal event listeners
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('hidden.bs.modal', function () {
+                cleanupModal();
+                const modalBody = this.querySelector('.modal-body');
+                if (modalBody) {
+                    modalBody.innerHTML = '';
+                }
+            });
+        });
+
+        function showDetailAnggota(divisi, nama, gambar, angkatan, biro , angkatan, biro) {
+            const detailModalBody = document.getElementById('detailModalBody');
+            let biroInfo = biro ? `<p class="text-muted mb-2"><strong>Biro:</strong> ${biro}</p>` : '';
+            detailModalBody.innerHTML = `
+                <div class="text-center">
+                    <img src="${gambar}" alt="${nama}" class="profile-img-large mb-4" onclick="openImage('${gambar}')">
+                    <h4 class="mb-3">${nama}</h4>
+                    <p class="text-muted mb-2"><strong>Divisi:</strong> ${divisi}</p>
+                    <p class="text-muted mb-2"><strong>Angkatan:</strong> ${angkatan}</p>
+                    ${biroInfo}
+                </div>
+            `;
+            const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+            detailModal.show();
+        }
+
+        function openImage(imageUrl) {
+            document.getElementById('gambarModalImg').src = imageUrl;
+            const gambarModal = new bootstrap.Modal(document.getElementById('gambarModal'));
+            gambarModal.show();
+        }
+
+        // Enhanced modal animations
+        $('.modal').on('show.bs.modal', function (e) {
+            $(this).find('.modal-dialog').addClass('slide-up');
+        });
+
+        $('.modal').on('hidden.bs.modal', function (e) {
+            $(this).find('.modal-dialog').removeClass('slide-up');
+        });
+
+        // Prevent modal from losing focus
+        $('.modal').on('shown.bs.modal', function(e) {
+            $(document).off('focusin.modal');
+        });
+
+        // Add touch support for card hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'perspective(1000px) rotateY(10deg) translateY(-5px)';
+                });
+                
+                card.addEventListener('touchend', function() {
+                    this.style.transform = 'perspective(1000px) rotateY(0deg)';
+                });
+            });
+
+            // Optimize modal for mobile
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.modal-dialog').forEach(dialog => {
+                    dialog.style.margin = '10px';
+                    dialog.style.width = 'auto';
+                });
+            }
+        });
+
+        // Add smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Enhanced animations initialization
+        function initializeAnimations() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.setProperty('--card-index', index);
+                observer.observe(card);
+            });
+
+            const sections = document.querySelectorAll('.section-header');
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.1
+            }
+        );
+
+        // Enhanced touch interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', () => {
+                    card.style.transform = 'scale(0.98)';
+                });
+                card.addEventListener('touchend', () => {
+                    card.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
