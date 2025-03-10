@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMPSPS UIN Sunan Kalijaga</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="description" content="HMPS-PS UIN Sunan Kalijaga - Himpunan Mahasiswa Program Studi Perbankan Syariah Fakultas Ekonomi dan Bisnis Islam UIN Sunan Kalijaga Yogyakarta">
+    <meta name="keywords" content="HMPS PS, HMPS PS UIN SUKA, Perbankan Syariah, UIN Sunan Kalijaga, FEBI UIN SUKA, Fakultas Ekonomi dan Bisnis Islam">
+    <meta name="author" content="HMPS-PS UIN Sunan Kalijaga">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HMPS-PS UIN Sunan Kalijaga">
+    <meta property="og:description" content="Portal Resmi Himpunan Mahasiswa Program Studi Perbankan Syariah FEBI UIN Sunan Kalijaga">
+    <meta property="og:image" content="https://raw.githubusercontent.com/site-id/content/main/logoprofilehmps.jpg">
+    <meta property="og:url" content="https://hmps-ps.github.io">
+    <style>
+        :root {
+            --primary-color: #000080;
+            --secondary-color: #000060;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 128, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            width: 50px;
+            height: 50px;
+            min-width: 50px; /* Ensure symmetry */
+            border-radius: 50%;
+            border: 2px solid white;
+            object-fit: cover; /* Maintain aspect ratio */
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: glowPulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 80%;
+        }
+
+        .navbar-brand img::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+            50% { box-shadow: 0 0 40px rgba(255,255,255,0.4); }
+            100% { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 128, 0.8), rgba(0, 0, 128, 0.8)), 
+                        url('https://hmps-ps.github.io/uinsk/IMG_4928.JPG') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color) !important;
+            border-color: var(--secondary-color) !important;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease 0.5s backwards;
+        }
+
+        .gallery-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 533px; /* Changed to 9:16 ratio */
+            margin-right: 15px;
+            scroll-snap-align: start;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .feedback-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+
+        .feedback-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card:hover .news-content {
+            transform: translateZ(20px);
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-more {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .about-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .about-card:hover {
+            transform: rotateX(5deg) rotateY(5deg);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ccc;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-item {
+            transition: transform 1s ease-in-out;
+        }
+
+        .carousel-fade .carousel-item {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .carousel-fade .carousel-item.active {
+            opacity: 1;
+        }
+
+        /* Modal animations */
+        .modal.fade .modal-dialog {
+            transform: scale(0.7);
+            transition: transform 0.3s ease-out;
+        }
+
+        .modal.show .modal-dialog {
+            transform: scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .navbar-brand span {
+                font-size: 0.9rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .news-card {
+                margin-bottom: 1rem;
+            }
+
+            .gallery-item {
+                width: 260px;
+                height: 460px;
+            }
+
+            .modal-dialog {
+                margin: 0.5rem;
+            }
+
+            .navbar-brand span small {
+                display: none;
+            }
+        }
+
+        /* Enhanced Animations */
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-scale {
+            animation: scale 0.5s ease-out;
+            transform-origin: center;
+        }
+
+        @keyframes scale {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Enhanced Card Animations */
+        .card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Smooth Image Loading */
+        img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+
+        /* Enhanced Modal Animations */
+        .modal.fade .modal-dialog {
+            transform: scale(0.7) translateY(-50px) rotate(-5deg);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal.show .modal-dialog {
+            transform: scale(1) translateY(0) rotate(0);
+            opacity: 1;
+        }
+
+        /* Touch-specific animations */
+        @media (hover: none) {
+            .card:active {
+                transform: scale(0.95);
+                transition: transform 0.2s;
+            }
+
+            .btn:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Enhanced Loading Animation */
+        .loader {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .loader h1 {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.8); }
+            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+        }
+
+        /* Financial Stats Cards */
+        .financial-stats {
+            background: linear-gradient(135deg, #000080 0%, #000045 100%);
+            padding: 4rem 0;
+            color: white;
+            margin-top: -2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .financial-stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.bi.go.id/images/logo-bi.png') no-repeat center;
+            opacity: 0.1;
+            animation: rotate 60s linear infinite;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            animation: floatAnimation 3s infinite ease-in-out;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            background: linear-gradient(45deg, #fff, #e6e6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Enhanced Animations */
+        @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        /* Currency Exchange Widget */
+        .exchange-rates {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+        }
+
+        .rate-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .rate-item:nth-child(1) { animation-delay: 0.1s; }
+        .rate-item:nth-child(2) { animation-delay: 0.2s; }
+        .rate-item:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Enhanced Button Effects */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            transition: all 0.4s cubic-bezier(0.2, 0, 0.3, 1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 80%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s cubic-bezier(0.2, 0, 0.3, 1);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .btn:hover {
+            transform: translate3d(0, -3px, 0);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover::before {
+            transform: translate(-50%, -50%) scale(3);
+            opacity: 0;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+        }
+
+        .btn:hover::after {
+            transform: translateX(100%);
+            transition: transform 0.7s cubic-bezier(0.2, 0, 0.3, 1);
+        }
+
+        /* Custom Cursor Effects */
+        body {
+            cursor: none;
+        }
+
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            transform: translate(-50%, -50%);
+            display: block !important;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: white;
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
+            display: block !important;
+        }
+
+        a:hover ~ .custom-cursor,
+        button:hover ~ .custom-cursor {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: var(--secondary-color);
+            mix-blend-mode: difference;
+        }
+
+        /* Enhanced Card Effects */
+        .card {
+            transition: all 0.5s cubic-bezier(0.2, 0, 0.3, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card:hover {
+            transform: rotateX(5deg) rotateY(5deg) translateY(-10px);
+            box-shadow: 20px 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Enhanced Navigation Animation */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+
+        .nav-link:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Fix Custom Cursor */
+        @media (min-width: 1024px) {
+            body {
+                cursor: none !important;
+            }
+
+            .custom-cursor, .cursor-dot {
+                display: block;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            body {
+                cursor: default !important;
+            }
+
+            .custom-cursor, .cursor-dot {
+                display: none;
+            }
+        }
+
+        .custom-cursor {
+            pointer-events: none !important;
+            mix-blend-mode: difference;
+            z-index: 9999;
+        }
+
+        .cursor-dot {
+            pointer-events: none !important;
+            z-index: 9999;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-body {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal .btn-close {
+            z-index: 1050;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .modal-dialog {
+            margin-top: 2rem;
+        }
+
+        /* Enhanced Image Loading with Fallback */
+        .img-fallback {
+            position: relative;
+            background: linear-gradient(45deg, #f1f1f1, #e1e1e1);
+            overflow: hidden;
+        }
+
+        .img-fallback::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Parallax Background */
+        .parallax-section {
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Floating Elements */
+        .float-element {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Interactive Buttons */
+        .btn-interactive {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-interactive::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-interactive:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Add horizontal news scroll */
+        .news-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .news-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .news-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .news-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .news-scroll .news-card {
+            flex: 0 0 300px;
+            max-width: 300px;
+        }
+
+        .news-scroll .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .news-content {
+            padding: 1rem;
+        }
+
+        .news-content h5 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-content p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Update about modal styles */
+        .about-modal-header {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .about-logo-outline {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid #000080;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .vision-mission-card {
+            background: #f8f9fa;
+            border-left: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .vision-mission-card:hover {
+            transform: translateX(10px);
+        }
+
+        .vision-mission-title {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Update navbar brand text */
+        .navbar-brand span {
+            font-size: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .navbar-brand small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            display: block;
+            white-space: normal;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                max-width: 70%;
+            }
+            
+            .navbar-brand img {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+            }
+            
+            .navbar-brand span {
+                font-size: 0.9rem;
+            }
+            
+            .navbar-brand small {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .news-scroll .news-card {
+                flex: 0 0 280px;
+                max-width: 280px;
+            }
+            
+            .news-scroll .news-image {
+                height: 250px;
+            }
+            
+            .gallery-item {
+                width: 240px;
+                height: 427px; /* Maintain 9:16 ratio */
+            }
+            
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .feedback-form {
+                padding: 1rem;
+            }
+        }
+
+        /* Fix cursor visibility */
+        .custom-cursor, .cursor-dot {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: none !important;
+        }
+
+        /* Ensure logo visibility */
+        .navbar-brand img,
+        .loader img,
+        .about-logo-container img {
+            opacity: 1 !important;
+            visibility: visible !important;
+            min-width: 50px;
+            min-height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Override general img opacity */
+        img {
+            opacity: 1;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                max-width: 200px;
+            }
+            
+            .navbar-brand img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .navbar-collapse {
+                background: rgba(0, 0, 128, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+
+            .news-scroll .news-card {
+                flex: 0 0 260px;
+                max-width: 260px;
+            }
+            
+            .stat-card {
+                margin-bottom: 1rem;
+            }
+
+            .financial-table {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Update navbar responsive styles */
+        @media (max-width: 768px) {
+            .navbar-brand small {
+                display: block !important;
+                font-size: 0.7rem;
+                line-height: 1.1;
+                white-space: normal;
+                width: 160px;
+            }
+        }
+
+        /* Islamic Banking Assets Table Styles */
+        .financial-stats .table {
+            color: white;
+            background: rgba(0, 0, 128, 0.2);
+            backdrop-filter: blur(10px);
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .financial-stats .table thead {
+            background: rgba(0, 0, 128, 0.5);
+        }
+
+        .financial-stats .table thead th {
+            border-bottom: none;
+            padding: 1rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .financial-stats .table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .financial-stats .table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .financial-stats .table td {
+            padding: 1rem;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .financial-stats .table tr.table-info {
+            background: rgba(0, 0, 128, 0.4);
+            font-weight: 600;
+        }
+
+        .financial-stats .table tr.table-info:hover {
+            background: rgba(0, 0, 128, 0.5);
+        }
+
+        /* Add these styles for navbar */
+        .navbar-toggler {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            border: none;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            width: 1.25em;
+            height: 1.25em;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-collapse {
+                background: rgba(0, 0, 128, 0.98);
+                padding: 0.5rem;
+                border-radius: 8px;
+                margin-top: 0.5rem;
+            }
+
+            .nav-item {
+                padding: 0.25rem 0;
+            }
+        }
+
+        .section-title-container {
+            background: linear-gradient(135deg, rgba(0,0,128,0.1) 0%, rgba(255,255,255,0.1) 50%, rgba(0,0,128,0.1) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="cursor-dot"></div>
+    <div class="loader">
+        <p>HMPS-PS UIN Sunan Kalijaga Yogyakarta</p>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://raw.githubusercontent.com/site-id/content/main/logoprofilehmps.jpg" alt="Logo HMPS" class="me-2">
+                <span>
+                    HMPS-PS<br>
+                    <small>Himpunan Mahasiswa Program Studi<br>Perbankan Syariah</small>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content container">
+            <h1 class="animate__animated animate__fadeInDown">PIM</h1>
+            <p class="animate__animated animate__fadeInUp">Portal Informasi Mahasiswa Perbankan Syariah</p>
+            <a href="#news" class="btn btn-light btn-lg animate__animated animate__fadeInUp animate__delay-1s btn-interactive">
+                <i class="fas fa-arrow-right me-2"></i>
+                Jelajahi
+            </a>
+        </div>
+    </section>
+
+    <section id="news" class="news-section py-5">
+        <div class="container">
+            <div class="section-title-container" data-aos="fade-up">
+                <h2 class="section-title">Berita Terbaru</h2>
+            </div>
+            <div class="news-scroll">
+                <div class="news-card" data-aos="fade-up">
+                    <div class="img-fallback">
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/berita4maret.png" alt="Berita 1" class="news-image">
+                    </div>
+                    <div class="news-content">
+                        <h5>We care project</h5>
+                        <p>Divisi Humas HMPS-PS mengadakan bagi takjil dan santunan kepada panti asuhan.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal1">
+                            Baca Selengkapnya
+                        </button>
+                    </div>
+                </div>
+
+                <div class="news-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="img-fallback">
+                        <img src="https://hmps-ps.github.io/uinsk/292EB78B-A15E-4242-ADB9-FA0399DCE4E3.jpeg" alt="Berita 2" class="news-image">
+                    </div>
+                    <div class="news-content">
+                        <h5>Seminar Nasional</h5>
+                        <p>HMPS-PS mengadakan seminar nasional tentang ekonomi syariah.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal2">
+                            Baca Selengkapnya
+                        </button>
+                    </div>
+                </div>
+
+                <div class="news-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="img-fallback">
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/berita6maret.png" alt="Berita 3" class="news-image">
+                    </div>
+                    <div class="news-content">
+                        <h5>Workshop Keuangan</h5>
+                        <p>Workshop tentang manajemen keuangan bagi mahasiswa baru.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal3">
+                            Baca Selengkapnya
+                        </button>
+                    </div>
+                </div>
+
+                <div class="news-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="img-fallback">
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/berita7maret.png" alt="Berita 4" class="news-image">
+                    </div>
+                    <div class="news-content">
+                        <h5>Pelatihan Kepemimpinan</h5>
+                        <p>Pelatihan kepemimpinan bagi anggota baru HMPS-PS.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal4">
+                            Baca Selengkapnya
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-more" data-bs-toggle="modal" data-bs-target="#allNewsModal">
+                Lihat Semua Berita
+            </button>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-5">
+        <div class="container">
+            <div class="section-title-container" data-aos="fade-up">
+                <h2 class="section-title">Galeri Kegiatan</h2>
+            </div>
+            <div class="gallery-container" data-aos="fade-up">
+                <div class="gallery-scroll">
+                    <div class="gallery-item">
+                        <img src="https://github.com/hmps-ps/uinsk/raw/main/gallery1.jpeg" alt="Gallery 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://github.com/hmps-ps/uinsk/raw/main/gallery2.jpeg" alt="Gallery 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://github.com/hmps-ps/uinsk/raw/main/gallery3.jpeg" alt="Gallery 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/berita7maret.png" alt="Gallery 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/berita8maret.png" alt="Gallery 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/berita9maret.png" alt="Gallery 6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-title-container" data-aos="fade-up">
+                <h2 class="section-title">Tentang Kami</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="about-card" data-aos="flip-left">
+                        <h3 class="text-center mb-4">HMPS-PS</h3>
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/logoprofilehmps.jpg" alt="Logo HMPS" class="img-fluid rounded-circle mx-auto d-block mb-4" style="width: 150px;">
+                        <p class="text-center mb-4">Himpunan Mahasiswa Program Studi Perbankan Syariah UIN Sunan Kalijaga</p>
+                        <button class="btn btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                            Tentang HMPS-PS
+                        </button>
+                        <button class="btn btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#kepengurusanModal">
+                            Lihat Kepengurusan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="feedback" class="feedback-section">
+        <div class="container">
+            <div class="section-title-container" data-aos="fade-up">
+                <h2 class="section-title">Masukan untuk Kami</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="feedback-form" data-aos="fade-up">
+                        <form id="feedbackForm" onsubmit="sendFeedback(event)">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Pesan</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="attachment" class="form-label">Lampiran (Opsional)</label>
+                                <input type="file" class="form-control" id="attachment" multiple>
+                                <small class="text-muted">*Support semua jenis file</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span>
+                                Kirim Masukan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Stats Section -->
+    <section class="financial-stats">
+        <div class="container">
+            <h2 class="text-center mb-5 text-white" data-aos="fade-up">Informasi Ekonomi Terkini</h2>
+            
+            <!-- Add Islamic Banking Assets Table -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card bg-transparent border-0">
+                        <div class="card-body px-0">
+                            <h4 class="text-center mb-4 text-white">Total Aset Perbankan Syariah Indonesia</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Jenis Bank</th>
+                                            <th>Total Aset (Triliun Rp)</th>
+                                            <th>Market Share</th>
+                                            <th>YoY Growth</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>BSI</td>
+                                            <td>295.4</td>
+                                            <td>4.9%</td>
+                                            <td>+16.8%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bank Muamalat</td>
+                                            <td>45.2</td>
+                                            <td>0.8%</td>
+                                            <td>+8.5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BNI Syariah</td>
+                                            <td>42.8</td>
+                                            <td>0.7%</td>
+                                            <td>+11.2%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BTN Syariah</td>
+                                            <td>38.9</td>
+                                            <td>0.6%</td>
+                                            <td>+9.8%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bank Umum Syariah</td>
+                                            <td>389.7</td>
+                                            <td>6.5%</td>
+                                            <td>+14.2%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Unit Usaha Syariah</td>
+                                            <td>185.4</td>
+                                            <td>3.1%</td>
+                                            <td>+12.8%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BPRS</td>
+                                            <td>21.2</td>
+                                            <td>0.4%</td>
+                                            <td>+9.6%</td>
+                                        </tr>
+                                        <tr class="table-info">
+                                            <td><strong>Total Industri</strong></td>
+                                            <td><strong>596.3</strong></td>
+                                            <td><strong>10%</strong></td>
+                                            <td><strong>+13.5%</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Existing Financial Stats Cards -->
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line fa-3x"></i>
+                        <h3>BI Rate</h3>
+                        <div class="stat-value">6.00%</div>
+                        <p>Updated: <span id="biRateDate">Feb 2024</span></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign fa-3x"></i>
+                        <h3>USD/IDR</h3>
+                        <div class="stat-value" id="usdRate">15,600</div>
+                        <p>Live Exchange Rate</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <i class="fas fa-percent fa-3x"></i>
+                        <h3>Inflasi YoY</h3>
+                        <div class="stat-value">2.57%</div>
+                        <p>Jan 2024</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <i class="fas fa-coins fa-3x"></i>
+                        <h3>Cadangan Devisa</h3>
+                        <div class="stat-value">145.1B</div>
+                        <p>USD (Jan 2024)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="chart-container">
+                        <h3 class="text-center mb-4">Inflasi Indonesia (YoY)</h3>
+                        <canvas id="inflationChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="exchange-rates">
+                        <h3 class="text-center mb-4">Kurs BI</h3>
+                        <div id="exchangeRates">
+                            <!-- Rates will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="footer-links mb-4">
+                <a href="#home">Beranda</a>
+                <a href="#news">Berita</a>
+                <a href="#about">Tentang</a>
+                <a href="#contact">Kontak</a>
+            </div>
+            <p>&copy; 2025 HMPSPS UIN Sunan Kalijaga. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Add these modals before the footer -->
+    <!-- Add these right before </body> -->
+    <!-- News Modals -->
+    <div class="modal fade" id="newsModal2" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Seminar Nasional</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://hmps-ps.github.io/uinsk/292EB78B-A15E-4242-ADB9-FA0399DCE4E3.jpeg" class="img-fluid mb-3" alt="Seminar">
+                    <h4>Seminar Nasional Ekonomi Syariah</h4>
+                    <p>HMPS-PS mengadakan seminar nasional dengan tema "Peran Ekonomi Syariah dalam Era Digital"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newsModal3" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Workshop Keuangan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://raw.githubusercontent.com/site-id/content/main/berita6maret.png" class="img-fluid mb-3" alt="Workshop">
+                    <h4>Workshop Manajemen Keuangan</h4>
+                    <p>Workshop khusus mahasiswa baru tentang manajemen keuangan syariah</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newsModal4" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pelatihan Kepemimpinan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://raw.githubusercontent.com/site-id/content/main/berita7maret.png" class="img-fluid mb-3" alt="Pelatihan">
+                    <h4>Pelatihan Kepemimpinan Mahasiswa</h4>
+                    <p>Program pelatihan kepemimpinan untuk anggota baru HMPS-PS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Modal with all images -->
+    <div class="modal fade" id="galleryModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Galeri Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://raw.githubusercontent.com/site-id/content/main/berita4maret.png" class="d-block w-100">
+                            </div>
+                            <!-- Add more carousel items for gallery -->
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Modal 1 -->
+    <div class="modal fade" id="newsModal1" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <button type="button" class="btn-close position-absolute end-0 m-3" data-bs-dismiss="modal"></button>
+                    <div class="text-center p-4">
+                        <h3 class="animate__animated animate__fadeInDown">We Care Project</h3>
+                        <div class="my-4">
+                            <img src="https://raw.githubusercontent.com/site-id/content/main/berita4maret.png" 
+                                 class="img-fluid rounded animate__animated animate__zoomIn" 
+                                 style="max-height: 400px; object-fit: cover;">
+                        </div>
+                        <p class="animate__animated animate__fadeInUp">
+                            Divisi Humas HMPS-PS mengadakan kegiatan berbagi takjil dan santunan kepada panti asuhan 
+                            sebagai bentuk kepedulian sosial dan implementasi nilai-nilai Islam dalam kehidupan bermasyarakat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="about-modal-header">
+                    <h3 class="animate__animated animate__fadeInDown mb-4">HMPS-PS</h3>
+                    <div class="about-logo-container">
+                        <div class="about-logo-outline"></div>
+                        <img src="https://raw.githubusercontent.com/site-id/content/main/logoprofilehmps.jpg" 
+                             class="w-100 h-100 rounded-circle animate__animated animate__pulse animate__infinite"
+                             style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="vision-mission-card">
+                                    <span class="vision-mission-title">
+                                        <i class="fas fa-info-circle me-2"></i>Tentang HMPS-PS
+                                    </span>
+                                    <p class="mb-0">HMPS-PS UIN Sunan Kalijaga adalah Himpunan Mahasiswa Program Studi Perbankan Syariah yang mengatur tentang arahan dan landasan kerja khusus untuk Himpunan Mahasiswa Program Studi Perbankan Syariah Fakultas Ekonomi dan Bisnis Islam Universitas Islam Negeri Sunan Kalijaga, yang selanjutnya disebut HMPS-PS FEBI UIN SUKA adalah wadah formal dan legal bagi seluruh aktivitas kemahasiswaan di tataran Program Studi Perbankan Syariah Fakultas Ekonomi dan Bisnis Islam Universitas Islam Negeri Sunan Kalijaga.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="vision-mission-card">
+                                    <span class="vision-mission-title">
+                                        <i class="fas fa-eye me-2"></i>Visi
+                                    </span>
+                                    <p class="mb-0">Menciptakan Perbankan Syariah yang aktif, progresif, inklusif, dan inovatif. Serta mewujudkan komunitas yang harmonis dengan berlandaskan nilai-nilai ukhuwah Islamiyah.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="vision-mission-card">
+                                    <span class="vision-mission-title">
+                                        <i class="fas fa-bullseye me-2"></i>Misi
+                                    </span>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Menjalin kerjasama dengan pihak eksternal maupun internal yang dapat mendukung peningkatan kualitas mahasiswa perbankan syariah agar terciptanya generasi-generasi emas di masa depan.</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Menciptakan wadah bagi mahasiswa Perbankan Syariah demi peningkatan kompetensi dalam bidang leadership, bahasa asing, serta mendorong literasi digital untuk memperluas akses informasi secara berkelanjutan.</li>
+                        <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" style="filter: invert(1)"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kepengurusan Modal -->
+    <div class="modal fade" id="kepengurusanModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <button type="button" class="btn-close position-absolute end-0 m-3" data-bs-dismiss="modal"></button>
+                    <iframe src="https://hmps-ps.github.io/uinsk/anggota4.html" 
+                            style="width: 100%; height: 80vh; border: none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Replace existing allNewsModal -->
+    <div class="modal fade" id="allNewsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Semua Berita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="allNewsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://raw.githubusercontent.com/site-id/content/main/berita4maret.png" class="d-block w-100">
+                                <div class="carousel-caption bg-dark bg-opacity-75 rounded p-3">
+                                    <h5>We Care Project</h5>
+                                    <p>Divisi Humas HMPS-PS mengadakan bagi takjil dan santunan kepada panti asuhan.</p>
+                                </div>
+                            </div>
+                            <!-- Add more carousel items for other news -->
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#allNewsCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#allNewsCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        // Simplified loader handling
+        window.addEventListener('load', function() {
+            const loader = document.querySelector('.loader');
+            if (loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                    setTimeout(() => {
+                        loader.remove();
+                        // Initialize AOS after loader is removed
+                        AOS.init({
+                            duration: 1000,
+                            once: true
+                        });
+                    }, 500);
+                }, 1000);
+            }
+        });
+
+        // Initialize all modals
+        var modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            new bootstrap.Modal(modal);
+        });
+
+        // Gallery scroll functionality
+        const galleryScroll = document.querySelector('.gallery-scroll');
+        let isDown = false;
+        let startX; let scrollLeft;
+
+        galleryScroll.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - galleryScroll.offsetLeft;
+            scrollLeft = galleryScroll.scrollLeft;
+        });
+
+        galleryScroll.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        galleryScroll.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        galleryScroll.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - galleryScroll.offsetLeft;
+            const walk = (x - startX) * 2;
+            galleryScroll.scrollLeft = scrollLeft - walk;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                if (targetId) {
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Active section detection for navigation
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Fade in animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+
+        // Initialize all carousels with custom settings
+        document.querySelectorAll('.carousel').forEach(carouselEl => {
+            const carousel = new bootstrap.Carousel(carouselEl, {
+                interval: 5000,
+                ride: 'carousel',
+                touch: true
+            });
+
+            // Add swipe support for touch devices
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            carouselEl.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            carouselEl.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(carousel);
+            });
+
+            function handleSwipe(carousel) {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        carousel.next();
+                    } else {
+                        carousel.prev();
+                    }
+                }
+            }
+        });
+
+        // Enhanced image loading
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+            });
+        });
+
+        // Smooth scroll with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                const headerOffset = 70;
+                if (target) {
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Enhanced touch interactions
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.card, .btn').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+
+        // Optimized carousel for touch devices
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            carousel.addEventListener('touchend', e => {
+                handleSwipe(carousel);
+            }, { passive: true });
+        });
+
+        // Add animation classes dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.add('animate-scale');
+            });
+            
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.classList.add('animate-float');
+            });
+        });
+
+        // Inflation Chart
+        const ctx = document.getElementById('inflationChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                datasets: [{
+                    label: 'Inflasi (%)',
+                    data: [3.27, 2.28, 2.56, 2.86, 2.61, 2.57],
+                    borderColor: '#000080',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(0, 0, 128, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '6 Bulan Terakhir'
+                    }
+                }
+            }
+        });
+
+        // Simulate exchange rates update
+        function updateExchangeRates() {
+            const rates = [
+                { currency: 'USD', rate: '15,600' },
+                { currency: 'EUR', rate: '16,800' },
+                { currency: 'SGD', rate: '11,500' }
+            ];
+
+            const ratesContainer = document.getElementById('exchangeRates');
+            ratesContainer.innerHTML = rates.map(rate => `
+                <div class="rate-item">
+                    <strong>${rate.currency}/IDR</strong>
+                    <span>Rp ${rate.rate}</span>
+                </div>
+            `).join('');
+        }
+
+        updateExchangeRates();
+        setInterval(updateExchangeRates, 60000); // Update every minute
+
+        // Real-time financial data fetching
+        async function fetchFinancialData() {
+            try {
+                // Bank Indonesia API endpoint (replace with actual API endpoint)
+                const biResponse = await fetch('https://api.bi.go.id/financial-data');
+                const biData = await biResponse.json();
+
+                // Update BI Rate
+                document.querySelector('#biRate .stat-value').textContent = 
+                    `${biData.biRate}%`;
+                document.querySelector('#biRateDate').textContent = 
+                    new Date(biData.lastUpdate).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+
+                // Update Exchange Rates
+                const ratesContainer = document.getElementById('exchangeRates');
+                biData.exchangeRates.forEach(rate => {
+                    const rateElement = document.createElement('div');
+                    rateElement.className = 'rate-item';
+                    rateElement.innerHTML = `
+                        <strong>${rate.currency}/IDR</strong>
+                        <span>Rp ${new Intl.NumberFormat('id-ID').format(rate.value)}</span>
+                    `;
+                    ratesContainer.appendChild(rateElement);
+                });
+
+                // Update Inflation Chart
+                const inflationData = biData.inflationRates;
+                inflationChart.data.labels = inflationData.map(item => item.period);
+                inflationChart.data.datasets[0].data = inflationData.map(item => item.value);
+                inflationChart.update();
+
+            } catch (error) {
+                console.error('Error fetching financial data:', error);
+            }
+        }
+
+        // Initialize chart with placeholder data
+        const inflationChart = new Chart(document.getElementById('inflationChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Inflasi (%)',
+                    data: [],
+                    borderColor: '#000080',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(0, 0, 128, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { 
+                        display: true,
+                        text: '6 Bulan Terakhir'
+                    }
+                }
+            }
+        });
+
+        // Fetch data initially and refresh every 5 minutes
+        fetchFinancialData();
+        setInterval(fetchFinancialData, 300000);
+
+        // Custom cursor movement
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.custom-cursor');
+            const dot = document.querySelector('.cursor-dot');
+            
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        // Cursor hover effects for interactive elements
+        document.querySelectorAll('a, button, .card').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                const cursor = document.querySelector('.custom-cursor');
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.backgroundColor = 'var(--secondary-color)';
+            });
+
+            element.addEventListener('mouseleave', () => {
+                const cursor = document.querySelector('.custom-cursor');
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.backgroundColor = 'var(--primary-color)';
+            });
+        });
+
+        // Mouse trail effect
+        function createTrailDot() {
+            const dot = document.createElement('div');
+            dot.className = 'trail-dot';
+            document.body.appendChild(dot);
+            
+            setTimeout(() => dot.remove(), 1000);
+            return dot;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const dot = createTrailDot();
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        // Enhanced cursor handling
+        function initCustomCursor() {
+            const cursor = document.querySelector('.custom-cursor');
+            const dot = document.querySelector('.cursor-dot');
+            let isVisible = false;
+
+            // Show cursor only on mouse movement
+            document.addEventListener('mousemove', (e) => {
+                if (!isVisible) {
+                    cursor.style.opacity = '1';
+                    dot.style.opacity = '1';
+                    isVisible = true;
+                }
+                
+                requestAnimationFrame(() => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    dot.style.left = e.clientX + 'px';
+                    dot.style.top = e.clientY + 'px';
+                });
+            });
+
+            // Hide cursor when leaving the window
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                dot.style.opacity = '0';
+                isVisible = false;
+            });
+        }
+
+        // Initialize cursor after page load
+        window.addEventListener('load', initCustomCursor);
+
+        // Initialize modals properly
+        document.addEventListener('DOMContentLoaded', function() {
+            var modalElements = document.querySelectorAll('.modal');
+            modalElements.forEach(function(modalElement) {
+                new bootstrap.Modal(modalElement);
+            });
+
+            // Fix button click handlers
+            document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetModal = document.querySelector(this.getAttribute('data-bs-target'));
+                    const modal = bootstrap.Modal.getInstance(targetModal) || new bootstrap.Modal(targetModal);
+                    modal.show();
+                });
+            });
+        });
+
+        // Add smooth parallax effect
+        window.addEventListener('scroll', () => {
+            const parallaxElements = document.querySelectorAll('.parallax-section');
+            parallaxElements.forEach(element => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * 0.5;
+                element.style.transform = `translateY(${rate}px)`;
+            });
+        });
+
+        // Add image loading fallback
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.parentElement.classList.add('img-fallback');
+                this.style.opacity = '0';
+            };
+        });
+
+        // Ensure images are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('img').forEach(img => {
+                img.style.opacity = '1';
+                // Retry loading if image fails
+                img.onerror = function() {
+                    this.src = this.src.replace('raw.githubusercontent.com', 'github.com');
+                };
+            });
+        });
+
+        async function sendFeedback(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const button = form.querySelector('button[type="submit"]');
+            const spinner = button.querySelector('.spinner-border');
+            
+            // Disable button and show spinner
+            button.disabled = true;
+            spinner.classList.remove('d-none');
+            
+            try {
+                const formData = new FormData();
+                formData.append('name', document.getElementById('name').value);
+                formData.append('email', document.getElementById('email').value);
+                formData.append('message', document.getElementById('message').value);
+                
+                // Add all selected files
+                const fileInput = document.getElementById('attachment');
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    formData.append('attachments[]', fileInput.files[i]);
+                }
+
+                // Send email using Email.js
+                await emailjs.send("default_service", "template_feedback", {
+                    to_email: "humashmpsps@gmail.com",
+                    from_name: document.getElementById('name').value,
+                    from_email: document.getElementById('email').value,
+                    message: document.getElementById('message').value,
+                    attachments: Array.from(fileInput.files).map(f => f.name).join(', ')
+                });
+
+                // Show success message
+                alert('Terima kasih! Pesan Anda telah terkirim.');
+                form.reset();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Maaf, terjadi kesalahan. Silakan coba lagi nanti.');
+            } finally {
+                // Re-enable button and hide spinner
+                button.disabled = false;
+                spinner.classList.add('d-none');
+            }
+        }
+
+        // Initialize Email.js with your user ID
+        emailjs.init("YOUR_USER_ID"); // Replace with your Email.js user ID
+    </script>
+</body>
+</html>
