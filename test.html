@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <title>HMPSPS UIN Sunan Kalijaga</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        :root {
+            --primary-color: #000080;
+            --secondary-color: #000060;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 128, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 128, 0.8), rgba(0, 0, 128, 0.8)), 
+                        url('https://hmps-ps.github.io/uinsk/IMG_4928.JPG') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color) !important;
+            border-color: var(--secondary-color) !important;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .loader p {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin: 1rem 0 2rem;
+            max-width: 80%;
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .loader::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease 0.5s backwards;
+        }
+
+        .gallery-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 533px; /* Changed to 9:16 ratio */
+            margin-right: 15px;
+            scroll-snap-align: start;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .feedback-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+
+        .feedback-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .btn-more {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .about-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .about-card:hover {
+            transform: rotateX(5deg) rotateY(5deg);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ccc;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-item {
+            transition: transform 1s ease-in-out;
+        }
+
+        .carousel-fade .carousel-item {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .carousel-fade .carousel-item.active {
+            opacity: 1;
+        }
+
+        /* Modal animations */
+        .modal.fade .modal-dialog {
+            transform: scale(0.7);
+            transition: transform 0.3s ease-out;
+        }
+
+        .modal.show .modal-dialog {
+            transform: scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .navbar-brand span {
+                font-size: 0.9rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Enhanced News Section */
+        .news-section {
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+
+        .news-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .news-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .news-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .news-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .news-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .news-card {
+            flex: 0 0 300px;
+            max-width: 300px;
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Enhanced Animations */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+            transition: width 0.5s ease;
+            animation: titleLine 1s ease forwards;
+        }
+
+        @keyframes titleLine {
+            to { width: 50%; }
+        }
+
+        .section-title[data-aos] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-title[data-aos].aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Card Hover Effects */
+        .news-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .news-card:hover .news-image::after {
+            left: 100%;
+        }
+
+        /* Enhanced Glossy Button Effects */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.6),
+                transparent
+            );
+            transition: 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0.2),
+                transparent
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Enhanced Modal Buttons */
+        .modal .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+        }
+
+        /* Enhanced Cards with Glossy Effect */
+        .news-card, .about-card {
+            background: linear-gradient(135deg, white, #f8f9fa);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .news-card::before, .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transition: 0.5s ease;
+        }
+
+        .news-card:hover::before, .about-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* Glowing Effect on Focus */
+        .btn:focus, 
+        input:focus, 
+        textarea:focus {
+            box-shadow: 0 0 15px rgba(0,0,128,0.3);
+            animation: glowPulse 1.5s infinite;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 15px rgba(0,0,128,0.3); }
+            50% { box-shadow: 0 0 25px rgba(0,0,128,0.5); }
+            100% { box-shadow: 0 0 15px rgba(0,0,128,0.3); }
+        }
+
+        /* Glass Morphism Effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Press Effect */
+        .btn-press {
+            transform-style: preserve-3d;
+            transform: perspective(800px) translateZ(0);
+            transition: transform 0.2s;
+        }
+
+        .btn-press:active {
+            transform: perspective(800px) translateZ(-20px);
+        }
+
+        /* Neon Glow Effect */
+        .btn-glow:hover {
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from {
+                box-shadow: 0 0 10px rgba(0,0,128,0.5),
+                            0 0 20px rgba(0,0,128,0.3),
+                            0 0 30px rgba(0,0,128,0.2);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(0,0,128,0.6),
+                            0 0 30px rgba(0,0,128,0.4),
+                            0 0 40px rgba(0,0,128,0.3);
+            }
+        }
+
+        /* Enhanced Section Title Container */
+        .section-title-wrapper {
+            position: relative;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title-wrapper .bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                var(--primary-color) 0%,
+                var(--secondary-color) 25%,
+                var(--primary-color) 50%,
+                var(--secondary-color) 75%,
+                var(--primary-color) 100%
+            );
+            opacity: 0.1;
+            animation: slideBg 15s linear infinite;
+        }
+
+        .section-title-wrapper .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes slideBg {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes sparkle {
+            0% { transform: translate(0, 0) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(100px, -100px) scale(1); opacity: 0; }
+        }
+
+        .section-title-wrapper h2 {
+            position: relative;
+            z-index: 1;
+            color: var(--primary-color);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .section-title-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 50%;
+            height: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+            opacity: 0.5;
+        }
+
+        /* Shine effect */
+        .section-title-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.3) 100%
+            );
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -75%; }
+            100% { left: 125%; }
+        }
+
+        /* Enhanced Navbar Styles */
+        .navbar {
+            padding: 0.5rem 0 !important;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            max-width: calc(100% - 60px); /* Leave space for toggle button */
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+        }
+
+        .navbar-brand span {
+            font-size: 1rem;
+            line-height: 1.2;
+            margin-left: 0.5rem;
+            white-space: normal;
+        }
+
+        .navbar-brand small {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .navbar-toggler {
+            padding: 0.25rem;
+            font-size: 1rem;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            width: 1.25em;
+            height: 1.25em;
+        }
+
+        .navbar-collapse {
+            background: transparent;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(0, 0, 128, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 0.5rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-link {
+                padding: 0.75rem 1rem;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .nav-link:hover, 
+            .nav-link:focus {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateX(5px);
+            }
+
+            .navbar-nav {
+                margin: 0;
+                padding: 0;
+            }
+
+            .navbar-brand span {
+                font-size: 0.9rem;
+            }
+
+            .navbar-brand small {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                max-width: calc(100% - 50px);
+            }
+
+            .navbar-brand img {
+                width: 35px;
+                height: 35px;
+                min-width: 35px;
+            }
+
+            .navbar-toggler {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Add outline to HMPS logo in about section */
+        .about-card img.logo-outline {
+            border: 3px solid var(--primary-color);
+            padding: 3px;
+            box-shadow: 0 0 15px rgba(0, 0, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .about-card img.logo-outline:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 128, 0.3);
+        }
+
+        /* Enhanced About Carousel */
+        #aboutCarousel {
+            padding: 20px 0;
+        }
+
+        #aboutCarousel .carousel-inner {
+            min-height: 400px;
+        }
+
+        #aboutCarousel .carousel-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #aboutCarousel .logo-container {
+            margin-bottom: 2rem;
+        }
+
+        #aboutCarousel .logo-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            padding: 3px;
+            margin-bottom: 1rem;
+        }
+
+        #aboutCarousel .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #aboutCarousel .carousel-control-prev,
+        #aboutCarousel .carousel-control-next {
+            width: 40px;
+            height: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.8;
+            margin: 0 1rem;
+        }
+
+        #aboutCarousel .carousel-indicators {
+            bottom: -20px;
+        }
+
+        /* Enhanced About Modal Styling */
+        #aboutModal .modal-content {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 0 30px rgba(0,0,128,0.3);
+        }
+
+        #aboutModal .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem;
+        }
+
+        #aboutModal .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        #aboutModal .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        #aboutCarousel {
+            background: var(--primary-color);
+            padding: 2rem 0;
+        }
+
+        #aboutCarousel .carousel-item {
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        #aboutCarousel .logo-container {
+            position: relative;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        #aboutCarousel .logo-container::after {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            animation: pulse 2s infinite;
+        }
+
+        #aboutCarousel .logo-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid white;
+            padding: 3px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            margin: 0 auto;
+            display: block;
+        }
+
+        #aboutCarousel .content {
+            position: relative;
+            z-index: 1;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease;
+        }
+
+        #aboutCarousel .content h4 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        #aboutCarousel .content p,
+        #aboutCarousel .content li {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        #aboutCarousel .carousel-control-prev,
+        #aboutCarousel .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            opacity: 0.8;
+            margin: 0 1rem;
+        }
+
+        #aboutCarousel .carousel-indicators {
+            bottom: -40px;
+        }
+
+        #aboutCarousel .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            margin: 0 5px;
+        }
+
+        #aboutCarousel .carousel-indicators button.active {
+            background-color: white;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.3; }
+            100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Kepengurusan Modal Styling */
+        #kepengurusanModal .modal-content {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 0 30px rgba(0,0,128,0.3);
+        }
+
+        #kepengurusanModal .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem;
+        }
+
+        #kepengurusanModal .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        #kepengurusanModal .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        #kepengurusanModal .modal-body {
+            background: var(--primary-color);
+        }
+
+        #kepengurusanModal iframe {
+            background: var(--primary-color);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Simplified About Modal Styling */
+        #aboutModal .modal-content {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        #aboutModal .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #aboutCarousel .carousel-item {
+            min-height: 400px;
+            padding: 2rem;
+            background: var(--primary-color);
+        }
+
+        #aboutCarousel .content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        #aboutCarousel .content img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 3px solid white;
+        }
+
+        #aboutCarousel .content h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        #aboutCarousel .content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        #aboutCarousel .content ul {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        #aboutCarousel .carousel-control-prev,
+        #aboutCarousel .carousel-control-next {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #aboutCarousel .carousel-indicators {
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <h1>HMPS-PS</h1>
+        <p>Himpunan Mahasiswa Program Studi<br>Perbankan Syariah<br>UIN Sunan Kalijaga Yogyakarta</p>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://site-id.github.io/content/logoprofilehmps.jpg" alt="Logo HMPS">
+                <span>
+                    HMPS-PS
+                    <small>Himpunan Mahasiswa Program Studi Perbankan Syariah</small>
+                </span>
+            </a>
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content container">
+            <h1 class="animate__animated animate__fadeInDown">PIM</h1>
+            <p class="animate__animated animate__fadeInUp">Portal Informasi Mahasiswa Perbankan Syariah</p>
+            <a href="#news" class="btn btn-primary btn-glow glass-effect btn-press animate__animated animate__fadeInUp animate__delay-1s">
+                Jelajahi
+            </a>
+        </div>
+    </section>
+
+    <section id="news" class="news-section">
+        <div class="container">
+            <div class="section-title-wrapper" data-aos="fade-up">
+                <div class="bg-slide"></div>
+                <h2>Berita Terbaru</h2>
+            </div>
+            <div class="news-container" data-aos="fade-up">
+                <div class="news-scroll">
+                    <div class="news-card" data-aos="fade-up">
+                        <img src="https://site-id.github.io/content/berita4maret.png" alt="Berita 1" class="news-image">
+                        <div class="news-content">
+                            <h5>We care project</h5>
+                            <p>Divisi Humas HMPS-PS mengadakan bagi takjil dan santunan kepada panti asuhan.</p>
+                            <button class="btn btn-primary btn-glow glass-effect btn-press" data-bs-toggle="modal" data-bs-target="#newsModal1">
+                                Baca Selengkapnya
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="news-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://site-id.github.io/content/berita5maret.png" alt="Berita 2" class="news-image">
+                        <div class="news-content">
+                            <h5>Seminar Nasional</h5>
+                            <p>HMPS-PS mengadakan seminar nasional tentang ekonomi syariah.</p>
+                            <button class="btn btn-primary btn-glow glass-effect btn-press" data-bs-toggle="modal" data-bs-target="#newsModal2">
+                                Baca Selengkapnya
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="news-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://site-id.github.io/content/berita6maret.png" alt="Berita 3" class="news-image">
+                        <div class="news-content">
+                            <h5>Workshop Keuangan</h5>
+                            <p>Workshop tentang manajemen keuangan bagi mahasiswa baru.</p>
+                            <button class="btn btn-primary btn-glow glass-effect btn-press" data-bs-toggle="modal" data-bs-target="#newsModal3">
+                                Baca Selengkapnya
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="news-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://site-id.github.io/content/berita7maret.png" alt="Berita 4" class="news-image">
+                        <div class="news-content">
+                            <h5>Pelatihan Kepemimpinan</h5>
+                            <p>Pelatihan kepemimpinan bagi anggota baru HMPS-PS.</p>
+                            <button class="btn btn-primary btn-glow glass-effect btn-press" data-bs-toggle="modal" data-bs-target="#newsModal4">
+                                Baca Selengkapnya
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary btn-glow glass-effect btn-press btn-more" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#allNewsModal">
+                        <i class="fas fa-newspaper me-2"></i>
+                        Lihat Semua Berita
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-5">
+        <div class="container">
+            <div class="section-title-wrapper" data-aos="fade-up">
+                <div class="bg-slide"></div>
+                <h2>Galeri Kegiatan</h2>
+            </div>
+            <div class="gallery-container" data-aos="fade-up">
+                <div class="gallery-scroll">
+                    <div class="gallery-item">
+                        <img src="https://site-id.github.io/content/berita4maret.png" alt="Gallery 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://site-id.github.io/content/berita5maret.png" alt="Gallery 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://site-id.github.io/content/berita6maret.png" alt="Gallery 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://site-id.github.io/content/berita7maret.png" alt="Gallery 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://site-id.github.io/content/berita8maret.png" alt="Gallery 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://site-id.github.io/content/berita9maret.png" alt="Gallery 6">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary btn-glow glass-effect btn-press" data-bs-toggle="modal" data-bs-target="#galleryModal">
+                    Lihat Semua Foto
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-title-wrapper" data-aos="fade-up">
+                <div class="bg-slide"></div>
+                <h2>Tentang Kami</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="about-card" data-aos="flip-left">
+                        <h3 class="text-center mb-4">HMPS-PS</h3>
+                        <img src="https://site-id.github.io/content/logoprofilehmps.jpg" 
+                             alt="Logo HMPS" 
+                             class="img-fluid rounded-circle mx-auto d-block mb-4 logo-outline" 
+                             style="width: 150px;">
+                        <p class="text-center mb-4">Himpunan Mahasiswa Program Studi Perbankan Syariah UIN Sunan Kalijaga</p>
+                        <button class="btn btn-primary btn-glow glass-effect btn-press w-100 mb-3" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                            Tentang HMPS-PS
+                        </button>
+                        <button class="btn btn-primary btn-glow glass-effect btn-press w-100 mb-3" data-bs-toggle="modal" data-bs-target="#kepengurusanModal">
+                            Lihat Kepengurusan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="feedback" class="feedback-section">
+        <div class="container">
+            <div class="section-title-wrapper" data-aos="fade-up">
+                <div class="bg-slide"></div>
+                <h2>Masukan untuk Kami</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="feedback-form" data-aos="fade-up">
+                        <form id="feedbackForm" onsubmit="sendEmail(event)">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Pesan</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-glow glass-effect btn-press w-100">
+                                <span class="spinner-border spinner-border-sm d-none me-2" role="status"></span>
+                                Kirim Masukan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="financial" class="py-5 bg-light">
+        <div class="container">
+            <div class="section-title-wrapper" data-aos="fade-up">
+                <div class="bg-slide"></div>
+                <h2>Info Ekonomi Syariah</h2>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Bank Info Cards -->
+                <div class="col-md-6">
+                    <div class="card h-100 glass-effect">
+                        <div class="card-header">
+                            <h5>Bank Syariah Indonesia</h5>
+                        </div>
+                        <div class="card-body" id="bsiRates">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Kurs Jual USD</span>
+                                <span class="fw-bold" id="bsiUsdSell">Loading...</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Kurs Beli USD</span>
+                                <span class="fw-bold" id="bsiUsdBuy">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Economic Indicators -->
+                <div class="col-md-6">
+                    <div class="card h-100 glass-effect">
+                        <div class="card-header">
+                            <h5>Indikator Ekonomi</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Inflasi (YoY)</span>
+                                <span class="fw-bold" id="inflation">Loading...</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>BI 7-Day Rate</span>
+                                <span class="fw-bold" id="biRate">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card glass-effect">
+                        <div class="card-header">
+                            <h5>Grafik Kurs USD/IDR</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="exchangeRateChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Modal 1 -->
+    <div class="modal fade" id="newsModal1" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">We care project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="newsCarousel1" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://site-id.github.io/content/berita4maret.png" class="d-block w-100" alt="News 1">
+                                <div class="carousel-caption">
+                                    <h5>Berbagi Takjil</h5>
+                                    <p>Kegiatan berbagi takjil di bulan Ramadhan</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://site-id.github.io/content/berita5maret.png" class="d-block w-100" alt="News 2">
+                                <div class="carousel-caption">
+                                    <h5>Santunan Anak Yatim</h5>
+                                    <p>Pemberian santunan kepada anak yatim</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel1" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel1" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                    <div class="mt-4">
+                        <h4>We care project</h4>
+                        <p>Divisi Humas HMPS-PS mengadakan kegiatan berbagi takjil dan santunan kepada panti asuhan sebagai bentuk kepedulian sosial dan implementasi nilai-nilai Islam dalam kehidupan bermasyarakat.</p>
+                        <p>Kegiatan ini merupakan program rutin yang dilaksanakan setiap tahun di bulan Ramadhan. Selain berbagi takjil, tim HMPS-PS juga memberikan santunan berupa sembako dan kebutuhan sehari-hari kepada anak-anak panti asuhan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Similar modals for News 2, 3, and 4 -->
+    <!-- Add modals with similar structure but different content -->
+
+    <!-- All News Modal -->
+    <div class="modal fade" id="allNewsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Semua Berita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="allNewsCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <!-- Add all news items here -->
+                            <div class="carousel-item active">
+                                <img src="https://site-id.github.io/content/berita4maret.png" class="d-block w-100" alt="News 1">
+                                <div class="carousel-caption">
+                                    <h5>We care project</h5>
+                                    <p>Divisi Humas HMPS-PS mengadakan bagi takjil dan santunan kepada panti asuhan.</p>
+                                </div>
+                            </div>
+                            <!-- Add more carousel items -->
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#allNewsCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#allNewsCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="modal fade" id="galleryModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Galeri Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="galleryCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://site-id.github.io/content/berita4maret.png" class="d-block w-100" alt="Gallery 1" style="height: 500px; object-fit: cover;">
+                            </div>
+                            <!-- Add more gallery items -->
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">HMPS-PS UIN Sunan Kalijaga</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="content">
+                                    <img src="https://site-id.github.io/content/logoprofilehmps.jpg" alt="HMPS-PS Logo">
+                                    <h4>Tentang HMPS-PS</h4>
+                                    <p>Himpunan Mahasiswa Program Studi Perbankan Syariah (HMPS-PS) adalah organisasi mahasiswa di UIN Sunan Kalijaga yang bergerak dalam pengembangan akademik dan non-akademik mahasiswa Perbankan Syariah.</p>
+                                    <p>Kami berkomitmen untuk mewadahi aspirasi dan potensi mahasiswa dalam mengembangkan diri di bidang keuangan dan perbankan syariah.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="content">
+                                    <h4>Visi HMPS-PS</h4>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">✨ Menjadi organisasi yang profesional dan inovatif dalam pengembangan ekonomi syariah</li>
+                                        <li class="mb-3">🎯 Mewujudkan wadah pengembangan potensi mahasiswa yang unggul</li>
+                                        <li class="mb-3">🌟 Membangun generasi yang berkarakter Islami dan berkompeten</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="content">
+                                    <h4>Misi HMPS-PS</h4>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">🎓 Meningkatkan kualitas akademik mahasiswa</li>
+                                        <li class="mb-3">💪 Mengembangkan soft skill dan leadership</li>
+                                        <li class="mb-3">🤝 Menjalin kerjasama dengan berbagai institusi</li>
+                                        <li class="mb-3">📈 Berkontribusi dalam ekonomi syariah</li>
+                                        <li class="mb-3">🌱 Membangun karakter Islami yang kuat</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+            new bootstrap.Modal(modal);
+        });
+
+        // Gallery scroll functionality
+        const galleryScroll = document.querySelector('.gallery-scroll');
+        let isDown = false;
+        let startX; let scrollLeft;
+
+        galleryScroll.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - galleryScroll.offsetLeft;
+            scrollLeft = galleryScroll.scrollLeft;
+        });
+
+        galleryScroll.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        galleryScroll.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        galleryScroll.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - galleryScroll.offsetLeft;
+            const walk = (x - startX) * 2;
+            galleryScroll.scrollLeft = scrollLeft - walk;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                if (targetId) {
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Active section detection for navigation
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Fade in animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+
+        // Initialize all carousels with custom settings
+        document.querySelectorAll('.carousel').forEach(carouselEl => {
+            const carousel = new bootstrap.Carousel(carouselEl, {
+                interval: 5000,
+                ride: 'carousel',
+                touch: true
+            });
+
+            // Add swipe support for touch devices
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            carouselEl.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            carouselEl.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(carousel);
+            });
+
+            function handleSwipe(carousel) {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        carousel.next();
+                    } else {
+                        carousel.prev();
+                    }
+                }
+            }
+        });
+
+        // Enhanced scroll functionality for news
+        const newsScroll = document.querySelector('.news-scroll');
+        let isNewsDown = false;
+        let newsStartX;
+        let newsScrollLeft;
+
+        newsScroll.addEventListener('mousedown', (e) => {
+            isNewsDown = true;
+            newsStartX = e.pageX - newsScroll.offsetLeft;
+            newsScrollLeft = newsScroll.scrollLeft;
+        });
+
+        newsScroll.addEventListener('mouseleave', () => {
+            isNewsDown = false;
+        });
+
+        newsScroll.addEventListener('mouseup', () => {
+            isNewsDown = false;
+        });
+
+        newsScroll.addEventListener('mousemove', (e) => {
+            if (!isNewsDown) return;
+            e.preventDefault();
+            const x = e.pageX - newsScroll.offsetLeft;
+            const walk = (x - newsStartX) * 2;
+            newsScroll.scrollLeft = newsScrollLeft - walk;
+        });
+
+        // Enhanced AOS initialization
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 50,
+            easing: 'ease-in-out'
+        });
+
+        // Add sparkle effect to section titles
+        function createSparkles() {
+            document.querySelectorAll('.section-title-wrapper').forEach(wrapper => {
+                setInterval(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    wrapper.appendChild(sparkle);
+                    
+                    sparkle.style.animation = 'sparkle 1.5s linear forwards';
+                    setTimeout(() => sparkle.remove(), 1500);
+                }, 300);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', createSparkles);
+
+        // Email sending function
+        function sendEmail(event) {
+            event.preventDefault();
+            
+            const spinner = event.target.querySelector('.spinner-border');
+            const button = event.target.querySelector('button');
+            
+            spinner.classList.remove('d-none');
+            button.disabled = true;
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            // Configure with your email service
+            const emailData = {
+                to: 'humashmpsps@gmail.com',
+                subject: 'Masukan Website HMPS-PS',
+                text: `Nama: ${formData.name}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`
+            };
+
+            // Send using your preferred email service (example using fetch)
+            fetch('YOUR_EMAIL_API_ENDPOINT', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(emailData)
+            })
+            .then(response => {
+                spinner.classList.add('d-none');
+                button.disabled = false;
+                alert('Terima kasih! Masukan Anda telah terkirim.');
+                event.target.reset();
+            })
+            .catch(error => {
+                spinner.classList.add('d-none');
+                button.disabled = false;
+                alert('Maaf, terjadi kesalahan. Silakan coba lagi.');
+            });
+        }
+
+        // Financial data update function
+        function updateFinancialData() {
+            // Get BSI Exchange Rate
+            fetch('https://www.bi.go.id/biapi/public/exchangerates')
+                .then(response => response.json())
+                .then(data => {
+                    const usdRate = data.find(rate => rate.currencyCode === 'USD');
+                    document.getElementById('bsiUsdSell').textContent = `Rp ${formatNumber(usdRate.sellRate)}`;
+                    document.getElementById('bsiUsdBuy').textContent = `Rp ${formatNumber(usdRate.buyRate)}`;
+                })
+                .catch(() => {
+                    // Fallback data if API fails
+                    document.getElementById('bsiUsdSell').textContent = 'Rp 15.650';
+                    document.getElementById('bsiUsdBuy').textContent = 'Rp 15.500';
+                });
+
+            // Get BI Rate and Inflation
+            fetch('https://www.bi.go.id/biapi/public/indicators')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('inflation').textContent = '2.57%'; // Latest data Feb 2024
+                    document.getElementById('biRate').textContent = '6.00%'; // Latest BI 7-Day Rate
+                })
+                .catch(() => {
+                    document.getElementById('inflation').textContent = '2.57%';
+                    document.getElementById('biRate').textContent = '6.00%';
+                });
+
+            // Update exchange rate chart with historical data
+            updateExchangeRateChart();
+        }
+
+        function updateExchangeRateChart() {
+            // Sample historical data (replace with actual API data)
+            const historicalData = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                rates: [15500, 15600, 15650, 15700, 15600, 15650]
+            };
+
+            exchangeRateChart.data.labels = historicalData.labels;
+            exchangeRateChart.data.datasets[0].data = historicalData.rates;
+            exchangeRateChart.update();
+        }
+
+        function formatNumber(number) {
+            return new Intl.NumberFormat('id-ID').format(number);
+        }
+
+        // Initialize data immediately and set update interval
+        updateFinancialData();
+        setInterval(updateFinancialData, 300000); // Update every 5 minutes
+
+        // Update loader timing
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loader = document.querySelector('.loader');
+                loader.classList.add('hide');
+                setTimeout(() => {
+                    loader.remove();
+                }, 500);
+            }, 1500); // Reduced loading time to 1.5 seconds
+        });
+    </script>
+</body>
+</html>
